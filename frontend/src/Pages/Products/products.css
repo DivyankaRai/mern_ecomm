@@ -1,0 +1,16 @@
+.main{
+    display: grid;
+    width:90%;
+    margin:auto;
+    grid-template-columns: repeat(3,1fr);
+    /* border: 1px solid red; */
+    gap:60px;
+    margin-top: 5%;
+}
+.main>div{
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 90%;
+    border: 1px solid red;
+}
