@@ -4,8 +4,8 @@
     background-color: white;
     position: relative;
     top: 80px;
-    border-top: 1px solid rgb(212, 204, 204);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    /* border-top: 1px solid rgb(212, 204, 204); */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .new_nav .nav_data{
@@ -22,7 +22,7 @@
 
 .new_nav .nav_data .left_data p{
     color: black;
-    font-weight: 600;
+    font-weight: bold;
     font-size: 19px;
     margin-top: 14px;
 }

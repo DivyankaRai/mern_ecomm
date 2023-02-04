@@ -12,8 +12,6 @@ const NavSecond = () => {
             <p>Makeup</p>
             <p>Skin</p>
             <p>Hair</p>
-            <p>Appliances</p>
-            <p>Men</p>
             <p>Fragrances</p>
         </div>
         <div className="right_data">

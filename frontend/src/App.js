@@ -6,6 +6,10 @@ import "./App.css"
 import Products from "./Pages/Products/Products";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SingleProduct from "./Pages/SingleProduct/SingleProduct";
+import Home from './component/Home/Home';
+import Login from './Pages/Register/Login';
+import Carrousell from './component/Home/Banner';
+import Signup from './Pages/Register/Signup';
 
 
 function App() {
@@ -13,13 +17,15 @@ function App() {
     <>
     <Navbar />
     <NavSecond/>
-    <Products/>
-      {/* <BrowserRouter>
-      <Routes>
+    {/* <Login/> */}
+    <Signup/>
+    {/* <Carrousell/> */}
+    {/* <Home/> */}
+    {/* <Slider/> */}
+      {/* <Routes>
         <Route path="/" element={<Products /> } />
         <Route path="/product/:id" element={<SingleProduct /> } />
-      </Routes>
-      </BrowserRouter> */}
+      </Routes> */}
     </>
   );
 }

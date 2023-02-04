@@ -6,20 +6,20 @@ import { useState, useReducer } from 'react'
 import { useEffect } from 'react'
 import axios from "axios"
 
-const reducer = (state,action) => {
-  switch (action.type) {
-    case 'FETCH_REQUEST':
-      return {...state, loading:true};
-    case 'FETCH_SUCCESS':
-      return {...state, productData:action.payload, loading:false};
-    case 'FETCH_FAIL': 
-      return {...state, loading:false, error:action.error}
-    default:
-      return state;
-  }
-}
-
 const Products = () => {
+
+  const reducer = (state,action) => {
+    switch (action.type) {
+      case 'FETCH_REQUEST':
+        return {...state, loading:true};
+      case 'FETCH_SUCCESS':
+        return {...state, productData:action.payload, loading:false};
+      case 'FETCH_FAIL': 
+        return {...state, loading:false, error:action.error}
+      default:
+        return state;
+    }
+  }
     
   const [ {loading,error,productData}, dispatch] = useReducer(reducer, {
     productData:[],
@@ -44,19 +44,19 @@ const Products = () => {
 
   return (
     <>
-    <h1>wertyu</h1>
     <div className="main">
     {
         productData.map( (e,i) =>{
             return(
                 <>
                 <div>
-                    <Link to={`/product/${i}`}>
+                    <Link to={`/product/${e.id}`}>
                     <img src={e.image} alt="img" />
                     </Link>
                     <h1>{e.name}</h1>
                     <p>{e.desc}</p>
                     <p>{e.price}</p>
+                    {/* <p>{Math.ceil(`${e.rating}`)}</p> */}
                     <button>Add To Cart</button>
                 </div>
                 </>
