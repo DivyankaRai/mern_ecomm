@@ -1,0 +1,26 @@
+.cart{
+    width: 90%;
+    height: auto;
+    display: flex;
+    border: 1px solid red;
+    margin: auto;
+    margin-top: 7%;
+}
+.cart>div{
+    width: 50%;
+    border: 1px soid blue;
+}
+h6{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.summ{
+    border: 1px soid blue;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+}
+.summ>div{
+    height: auto;
+    width: 90%;
+}

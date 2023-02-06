@@ -25,7 +25,7 @@ export const picData = [
       "p":"Free Mask On All Orders"
     },
     {
-      img:'https://images-static.nykaa.com/creatives/191c4dd6-37f9-4099-93cc-0640391dcbb6/default.png?tr=w-300,cm-pad_resize',
+      img:'https://images-static.nykaa.com/creatives/695c46ed-9aed-43a3-9e71-8ec405f57bbf/default.png?tr=w-600,cm-pad_resize',
       "h":"Min. 50% Off",
       "p":"On Entire Range"
     },

@@ -60,7 +60,7 @@
     margin-top: 2%;
 }
 .brands div{
-    height: 400px;
+    height: 370px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 20px;
 }
@@ -71,7 +71,7 @@ h3{
 }
 .brands div h5 {
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: 15px;
     margin-left: 4%;
 }
 .brands div h6 {
@@ -82,7 +82,7 @@ h3{
 }
 .brands div img{
     width: 100%;
-    height: 81%;
+    height: 75%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
@@ -97,7 +97,7 @@ h3{
     margin-top: 2%;
 }
 .top_brands div{
-    height: 340px;
+    height: 280px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 20px;
 }
@@ -108,16 +108,18 @@ h3{
     margin-left: 4%;
     color: #fc2779;
     margin-top: 12px;
+    font-size: 19px;
 }
 .top_brands div h5 {
     font-weight: 600;
     margin-top: 5px;
     margin-left: 4%;
     color: gray;
+    font-size: 17px;
 }
 .top_brands div img{
     width: 100%;
-    height: 70%;
+    height: 73%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }

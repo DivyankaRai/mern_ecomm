@@ -1,17 +1,39 @@
-// import { createContext } from "react"
+import { createContext, useReducer } from "react"
 
-// export const Store = createContext()
+export const Store = createContext()
 
-// const StoreProvider = ({children}) => {
+const initialState = {
+    cart:{
+        cartItem:[]
+    },
+}
 
-//     const [state, dispatch] = useReducer(reducer, initialState, init)
-//     const value = {state,dispatch}
+function reducer(state,action){
+    switch(action.type){
+        case 'Cart_Add_Item':
+            return {
+                ...state,
+                cart:{
+                    ...state.cart,
+                    cartItems:[...state.cart.cartItems, action.payload ]
+                }
+                 
+            }
+        default:
+            return state
+    }
+}
 
-//   return (
-//     <Store.Provider value={value}>
-//       {children}
-//     </Store.Provider>
-//   )
-// }
+const StoreProvider = (props) => {
 
-// export default StoreProvider
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const value = {state,dispatch}
+
+  return (
+    <Store.Provider value={value}>
+      {props.children}
+    </Store.Provider>
+  )
+}
+
+export default StoreProvider

@@ -5,6 +5,8 @@ import {Link} from "react-router-dom"
 import { useState, useReducer } from 'react'
 import { useEffect } from 'react'
 import axios from "axios"
+import { useContext } from 'react'
+import { Store } from '../../store'
 
 const Products = () => {
 
@@ -42,6 +44,7 @@ const Products = () => {
     getData()
   }, [])
 
+
   return (
     <>
     <div className="main">
@@ -57,7 +60,7 @@ const Products = () => {
                     <p>{e.desc}</p>
                     <p>{e.price}</p>
                     {/* <p>{Math.ceil(`${e.rating}`)}</p> */}
-                    <button>Add To Cart</button>
+                    <button onClick={handleCart}>Add To Cart</button>
                 </div>
                 </>
             )

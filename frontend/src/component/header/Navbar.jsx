@@ -1,10 +1,14 @@
 import React from "react";
 import "./Navbar.css";
 import Badge from 'react-bootstrap/Badge';
+import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import StoreProvider, { Store } from '../../store';
 // import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 // import Avatar from '@mui/material/Avatar';
 
 const Navbar = () => {
+
   return (
     <header>
       <nav>
@@ -34,7 +38,16 @@ const Navbar = () => {
             <a>Signin</a>
           </div>
           <div className="cart_btn">
-          <i class="fa-solid fa-bag-shopping" style={{ fontSize: "33px", color: "#fc2779"}} ></i><Badge bg="light" style={{color: "#fc2779", fontSize:"14px"}} ></Badge>
+          <Link to='/cart'>
+            Cart
+            {/* <i class="fa-solid fa-bag-shopping" style={{ fontSize: "33px", color: "#fc2779"}} ></i>
+            {
+              cart.cartItems.length > 0 ? 
+                <Badge bg="light" style={{color: "#fc2779", fontSize:"14px"}} >
+                {cart.cartItems.length}
+                </Badge> : "No"
+            } */}
+          </Link>
           </div>
           <i class="fa-solid fa-heart" style={{ fontSize: "30px", color: "#fc2779", cursor: "pointer"}} ></i>
           

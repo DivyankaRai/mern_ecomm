@@ -7,9 +7,7 @@ import "./SingleProduct.css"
 import { Loader } from '../../component/Loading'
 
 const SingleProduct = () => {
-  const [get, setget] = useState()
-  setget(0)
-
+  
   const id = useParams()
   const [spin, setspin] = useState(true)
 
@@ -65,10 +63,10 @@ const SingleProduct = () => {
           <h5>⭐⭐⭐⭐⭐⭐</h5>
           <h5>MRP: ₹375</h5>
           <p>inclusive of all taxes</p>
-          <button>Add to Bag</button>
+          <button >Add to Bag</button>
           </div>
           <div className="last">
-asdfghjk{get}
+
           </div>
         </div>
     </div>

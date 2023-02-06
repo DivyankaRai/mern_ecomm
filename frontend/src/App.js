@@ -10,22 +10,26 @@ import Home from './component/Home/Home';
 import Login from './Pages/Register/Login';
 import Carrousell from './component/Home/Banner';
 import Signup from './Pages/Register/Signup';
+import Cart from './Pages/Cart/Cart';
 
 
 function App() {
+
+
   return (
     <>
     <Navbar />
     <NavSecond/>
     {/* <Login/> */}
-    <Signup/>
+    {/* <Signup/> */}
     {/* <Carrousell/> */}
     {/* <Home/> */}
+    {/* <Cart/> */}
     {/* <Slider/> */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Products /> } />
         <Route path="/product/:id" element={<SingleProduct /> } />
-      </Routes> */}
+      </Routes>
     </>
   );
 }
