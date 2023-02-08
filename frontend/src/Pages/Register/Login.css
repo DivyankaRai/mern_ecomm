@@ -1,12 +1,12 @@
 .login_div{
-    width: 70vh;
+    width: 60vh;
     height:auto;
     /* border:2px solid red; */
     margin: auto;
     margin-top: 7%;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 h1{
     margin-left: 15%;
@@ -14,14 +14,15 @@ h1{
     /* margin-top: 15%; */
     margin-bottom: 6%;
     font-weight: bold;
-    font-size: 43px;
+    font-size: 30px;
 }
 h5{
     margin-left: 15%;
     margin-top: 7%;
+    font-size: 14px;
 }
 .input{
-    height: 40px;
+    height: 35px;
     width: 70%;
     margin-left: 15%;
     border-radius: 10px;
@@ -30,11 +31,14 @@ h5{
 }
 h4{
     margin-top: 4%;
+    font-size: 18px;
     margin-left: 15%;
 }
-button{
+.buton{
     margin-top: 8%;
     width: 70%;
     margin-left: 15%;
+    height: 40px;
     border-radius: 10px;
+    font-size: 24px;
 }

@@ -21,15 +21,15 @@ function App() {
     <Navbar />
     <NavSecond/>
     {/* <Login/> */}
-    {/* <Signup/> */}
+    <Signup/>
     {/* <Carrousell/> */}
     {/* <Home/> */}
     {/* <Cart/> */}
     {/* <Slider/> */}
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Products /> } />
         <Route path="/product/:id" element={<SingleProduct /> } />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

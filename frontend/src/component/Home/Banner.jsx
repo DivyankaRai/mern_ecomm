@@ -5,7 +5,7 @@ function Carrousell() {
     <>
     <h2>ertyui</h2>
     {/* <p></p> */}
-    <Carousel>     
+    <Carousel className=" mt-5">     
       <Carousel.Item interval={2000}>
         <img
           className="d-block w-100 mt-3"

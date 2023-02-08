@@ -39,14 +39,8 @@ const Navbar = () => {
           </div>
           <div className="cart_btn">
           <Link to='/cart'>
-            Cart
-            {/* <i class="fa-solid fa-bag-shopping" style={{ fontSize: "33px", color: "#fc2779"}} ></i>
-            {
-              cart.cartItems.length > 0 ? 
-                <Badge bg="light" style={{color: "#fc2779", fontSize:"14px"}} >
-                {cart.cartItems.length}
-                </Badge> : "No"
-            } */}
+            {/* Cart */}
+             <i class="fa-solid fa-bag-shopping" style={{ fontSize: "33px", color: "#fc2779"}} ></i>
           </Link>
           </div>
           <i class="fa-solid fa-heart" style={{ fontSize: "30px", color: "#fc2779", cursor: "pointer"}} ></i>
