@@ -45,7 +45,7 @@ const SingleProduct = () => {
     getData()
     setTimeout(() => {
       setspin(false)
-    }, 1200);
+    }, 1300);
   }, [])
 
   return (
