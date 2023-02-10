@@ -12,10 +12,7 @@ router.put('/update/product/:id', controller.updateProduct)
 router.delete('/delete/product/:id', controller.deleteProduct)
 
 // user routes
-
 router.post("/user/register",upload.single("user_profile"),usercontroller.registerUser)
-
+router.post("/user/login", usercontroller.loginUser)
 
 module.exports = router
-
-// const product = 
