@@ -6,6 +6,7 @@ const NavSecond = () => {
     <div className='new_nav'>
       <div className="nav_data">
         <div className="left_data">
+          
             <p>Categories</p>
             <p>Beauty Advice</p>
             <p>Brands</p>

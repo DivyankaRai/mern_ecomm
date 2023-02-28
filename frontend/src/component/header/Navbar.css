@@ -7,7 +7,6 @@ header{
     z-index:2;
     width: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    /* border:2px solid pink */
 }
 
 header nav{
@@ -30,13 +29,12 @@ header nav .left{
     align-items: center;
     flex: .7;
     height: 48px;
-    /* border: none; */
 }
 
 
 
 header nav .left input{
-    width:470px;
+    width:400px;
     height: 38px;
     border: none;
     outline: none;
@@ -44,7 +42,6 @@ header nav .left input{
     border-top-left-radius: 3px;
     font-size: 14px;
     padding-left: 10px;
-    /* border: 1px solid red; */
 }
 
 header nav .left .search_icon{
@@ -64,37 +61,33 @@ header nav .nav_searchbaar{
     justify-content: center;
     align-items: center;
 }
-
-/* header nav .left input:focus{
-    border: 2px solid #febd69;
-} */
-
 header nav .right{
     display: flex;
     justify-content:space-around;
     align-items: center;
-    /* border: 2px solid red; */
     flex: .2;
 }
 
 header nav .right .nav_btn a{
-    color: #fff;
+    color: white;
     font-weight: 500;
-    font-size: 16px;
-    text-decoration: none;
+    text-align: center;
+    /* font-size: 20px; */
+    /* border: 1px solid red; */
+    /* height: 40px;
+    width: 40px; */
     margin-right: 2px;
-    /* border: 1px solid #131921; */
+    margin-top: -1px;
     background-color: #fc2779;
-    border-radius: 2px;
-    padding: 8px;
     border-radius: 10px;
+    padding: 8px;
 }
 
 
 
-header nav .right .nav_btn a:hover{
-    /* border: 1px solid pink; */
+header nav .right .nav_btn a :hover{
     cursor: pointer;
+    
 }
 
 header nav .right .cart_btn{
@@ -104,14 +97,9 @@ header nav .right .cart_btn{
     margin-top: 2px;
     padding: 8px;
     border-radius: 2px;
-    /* border: 1px solid #131921; */
     align-items: center;
     justify-content: space-between;
     margin-right: 3px;
-}
-
-header nav .right .cart_btn:hover{
-    /* border: 1px solid white; */
 }
 
 header nav .right .cart_btn #icon{
@@ -144,21 +132,89 @@ header nav .avtar2{
 header .hamburgur{
     display: none;
 }
-
-header .extrasearch{
+header .loginbox{
     position: absolute;
     background-color: #fff;
-    color: #000;
-    top: 50px;
+    color: #fc2779;
+    top: 60px;
+    width: 120px;
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+header .loginbox .logout{
+    width: 100%;
+    height: 45px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header .loginbox .adminn{
+    width: 100%;
+    height: 45px;
+    margin-top: 2px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header .loginbox .adminn h1{
+    font-size: 17px;
+    color: black;
+    text-align: center;
+    margin-top: -1px;
+}
+header .loginbox .logout h1{
+    font-size: 17px;
+    color: black;
+}
+
+header .searchbox{
+    position: absolute;
+    background-color: #fff;
+    color: #fc2779;
+    top: 55px;
     width: 440px;
+    height: 236px;
+    /* border:2px solid red; */
+    overflow:scroll ;
 }
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: white; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #fc2779; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fc2779; 
+  }
 
-header .extrasearch a{
+header .searchbox *{
     text-decoration: none;
-    color: #000;
+    color: black;
+    font-weight: 600;
+}
+header .searchbox .list_div{
+    height: 60px;
+    width: 100%;
+    /* border: 2px solid gray; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
-/* drawer sty */
 header nav .drawer{
     width: 250px;
     background-color: red;
@@ -200,9 +256,7 @@ header nav .drawer{
     }
     
     header nav .left .search_icon{
-        /* color: #fff;
-        font-size: 18px;
-        background-color: #131921; */
+
         display: none;
     }
     header nav .navlogo img{

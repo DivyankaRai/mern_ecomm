@@ -1,39 +1,41 @@
-import { createContext, useReducer } from "react"
+import {legacy_createStore , applyMiddleware , combineReducers} from "redux"
+import thunk from "redux-thunk"
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { productReducer } from "./redux/Products/productReducer";
+import { singleProductReducer } from "./redux/SingleProduct/singleProductReducer";
+import { signUpReducer } from "./redux/SignUp/signReducer";
+import { LoginReducer } from "./redux/Login/loginReducer";
+import { cartReducer } from "./redux/Cart/CartReducer";
+import { orderReducer } from "./redux/Order/OrderReducer";
+import {adminProductReducer} from './Admin/Redux/AdminReducer'
 
-export const Store = createContext()
+const rootReducer = combineReducers({
+    products: productReducer,
+    singleProduct: singleProductReducer,
+    signUp: signUpReducer,
+    login: LoginReducer,
+    cart: cartReducer,
+    order: orderReducer,
+    adminProduct: adminProductReducer
+})
 
-const initialState = {
+
+const initState = {
     cart:{
-        cartItem:[]
-    },
-}
-
-function reducer(state,action){
-    switch(action.type){
-        case 'Cart_Add_Item':
-            return {
-                ...state,
-                cart:{
-                    ...state.cart,
-                    cartItems:[...state.cart.cartItems, action.payload ]
-                }
-                 
-            }
-        default:
-            return state
+        cartItems: localStorage.getItem('cart') ? 
+        JSON.parse(localStorage.getItem('cart')) : [],
+        shippingInfo:
+            localStorage.getItem('shipping') ? 
+            JSON.parse(localStorage.getItem('shipping')) : {}
     }
 }
 
-const StoreProvider = (props) => {
+const store = legacy_createStore(
+    rootReducer,
+    initState,
+    composeWithDevTools(
+        applyMiddleware(thunk)
+    )
+)
 
-    const [state, dispatch] = useReducer(reducer, initialState)
-    const value = {state,dispatch}
-
-  return (
-    <Store.Provider value={value}>
-      {props.children}
-    </Store.Provider>
-  )
-}
-
-export default StoreProvider
+export default store

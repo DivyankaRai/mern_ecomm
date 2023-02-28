@@ -1,79 +1,122 @@
-import React from 'react'
-import {Link, useParams} from "react-router-dom"
-import {useReducer } from 'react'
-import { useEffect, useState } from 'react'
-import axios from "axios"
-import "./SingleProduct.css"
-import { Loader } from '../../component/Loading'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./SingleProduct.css";
+import { Loader } from "../../component/Loading";
+import {
+  singleProductFailure,
+  singleProductRequest,
+  singleProductSuccess,
+} from "../../redux/SingleProduct/singleProductAction";
+import { addCartItems } from "../../redux/Cart/CartAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 const SingleProduct = () => {
-  
-  const id = useParams()
-  const [spin, setspin] = useState(true)
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart.cartItems);
+  const product = useSelector((store) => store.singleProduct.singleProducts);
 
-  const reducer = (state,action) => {
-    switch (action.type) {
-      case 'FETCH_REQUEST':
-        return {...state, loading:true};
-      case 'FETCH_SUCCESS':
-        return {...state, productData:action.payload, loading:false};
-      case 'FETCH_FAIL': 
-        return {...state, loading:false, error:action.error}
-      default:
-        return state;
-    }
-  }
-    
-  const [ {loading,error,productData}, dispatch] = useReducer(reducer, {
-    productData:[],
-    loading:true,
-    error:''
-  })
+  const { id } = useParams();
+  const [spin, setspin] = useState(false);
+  const [quantity, setquantity] = useState(1);
 
-  const getData = async() =>{
-    dispatch({type: 'FETCH_REQUEST'})
+  const getProduct = () => {
+    dispatch(singleProductRequest());
+    return axios
+      .get(`https://glowgirlbackend.onrender.com/product/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(singleProductSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(singleProductFailure());
+      });
+  };
+
+  const incQuantity = () => {
+    const quan = quantity + 1;
+    setquantity(quan);
+    console.log("inc");
+  };
+
+  console.log(product,"sedrtgyh")
+  const decQuantity = () => {
+    const quan = quantity - 1;
+    setquantity(quan);
+  };
+
+  const addtoCart = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/products/2')
-      dispatch({type: 'FETCH_SUCCESS', payload:res.data.produts })
+      dispatch(addCartItems(id, quantity));
+      toast("🤩 Item added to Cart");
+      nav("/cart");
     } catch (error) {
       console.log(error);
-      dispatch({type: 'FETCH_FAIL', payload:error.message })
     }
-  }
+  };
+
+  localStorage.setItem("cart", JSON.stringify(cart));
 
   useEffect(() => {
-    getData()
+    getProduct();
     setTimeout(() => {
-      setspin(false)
+      setspin(false);
     }, 1300);
-  }, [])
+  }, []);
 
   return (
     <>
-      {
-        spin ? <Loader/>: 
+      {spin ? (
+        <Loader />
+      ) : (
         <div className="s_main">
-        <div className='s_img'>
-            <img src='https://images-static.nykaa.com/creatives/9ebcba8c-fc59-449f-a042-126bc020a075/default.jpg?tr=w-240,cm-pad_resize' alt=''/>
-        </div>
-        <div className='info'>
-          <div className="s_info">
-          <h4>Kama Ayurveda Eladi Hydrating Face Cream</h4>
-          <p>wertyuiuyt54 sdfgtyhujikol sdfghjkl asdftyuio sdfghjk werftgyhjk</p>
-          <h5>⭐⭐⭐⭐⭐⭐</h5>
-          <h5>MRP: ₹375</h5>
-          <p>inclusive of all taxes</p>
-          <button >Add to Bag</button>
+          <div className="s_img">
+            <img src={product.images} alt="" />
           </div>
-          <div className="last">
+          <div className="info">
+            <div className="s_info">
+              <h1>{product.name}</h1>
+              <h3>{product.description}</h3>
+              <h4>
+                Rating: &nbsp;{product.rating}{" "}
+                <i class="fa-solid fa-star" style={{ }}></i>
+              </h4>
+              <h4>MRP: &nbsp;&nbsp;₹ <span>{product.price}</span></h4>
+              <p>inclusive of all taxes</p>
+              <div className="btnss">
+                <i
+                  class="fa-solid fa-square-plus"
+                  onClick={incQuantity}
+                  // style={{ color: " #fc2779", fontSize: "30px" }}
+                ></i>
+                <h2>{quantity}</h2>
+                <i
+                  class="fa-solid fa-square-minus"
+                  onClick={quantity > 1 ? decQuantity : ""}
+                  // style={{ color: " #fc2779", fontSize: "30px" }}
+                ></i>
+              </div>
+              <button className="button" onClick={addtoCart}>
+                Add to Bag
+              </button>
+            </div>
+            {/* <div className="last">
 
+            </div> */}
           </div>
+          <ToastContainer position="top-center"/>
         </div>
-    </div>
-      }
-   
+      )}
     </>
-  )
-}
+  );
+};
 
-export default SingleProduct
+export default SingleProduct;

@@ -1,49 +1,115 @@
-const users = require('../models/userShema')
+const userdb = require('../models/userShema')
+var bcrypt = require("bcryptjs");
 
 // register 
 exports.registerUser = async(req,res)=>{
-    const file = req.file.filename;
-    const {name,email,password}=req.body 
+
+    const { fname,lname,email,password} = req.body;
+
+    if (!fname || !email || !password) {
+        res.status(422).json({ error: "fill all the details" })
+    }
 
     try {
-        const peruser = await users.findOne({email:email})
-        if(peruser){
-         res.status(401).json("User already exists")
+
+        const preuser = await userdb.findOne({ email: email })
+
+        if (preuser) {
+            res.status(422).json({ error: "This Email is Already Exist" })
+        } else {
+            const finalUser = new userdb({
+                fname,lname,email,password
+            });
+
+            // here password hasing
+            const storeData = await finalUser.save();
+
+            // console.log(storeData);
+            res.status(201).json({ status: 201, storeData })
         }
-        else{
-         const userData = new users({
-             name,email,password,profile:file
-         })
-         await userData.save()
-         const token = userData.getJWTToken()
-         res.status(200).json(token)
-         console.log(token)
-        }
-     } catch (error) {
-         console.log(error)
-     }
+
+    } catch (error) {
+        // res.status(422).json(error)
+        console.log(error)
+    }
 }
 
 //  Login User
 exports.loginUser = async(req,res)=>{
-    const {email,password}=req.body 
-    console.log(email)
 
-    const user = await users.findOne({email})
+    const { email, password } = req.body;
+    console.log(req.body)
 
-    if(!user){
-        res.status(401).json("User doesn't exists here")
+    if (!email || !password) {
+        res.status(422).json({ error: "fill all the details" })
     }
-    else{
-        const passwordMatch = await user.comparePassword(password)
 
-        if(!passwordMatch){
-            res.status(401).json("User doesn't exists")
+    try {
+       const userValid = await userdb.findOne({email:email});
+
+        if(userValid){
+
+            const isMatch = await bcrypt.compare(password,userValid.password);
+
+            if(!isMatch){
+                res.status(422).json({ error: "invalid details"})
+            }else{
+
+                // token generate
+                const token = await userValid.generateAuthtoken();
+
+                // cookiegenerate
+                res.cookie("usercookie",token,{
+                    expires:new Date(Date.now()+9000000),
+                    httpOnly:true
+                });
+
+                const result = {
+                    userValid,
+                    token
+                }
+                res.status(201).json({status:201,result})
+            }
         }
 
-        const token = user.getJWTToken()
-        res.status(200).json(token)
-        console.log(token)
-
+    } catch (error) {
+        res.status(401).json(error);
+        console.log("catch block",error);
     }
 }
+
+exports.logoutUser = async(req,res,next) => {
+
+    try {
+        req.rootUser.tokens =  req.rootUser.tokens.filter((curelem)=>{
+            return curelem.token !== req.token
+        });
+
+        res.clearCookie("usercookie",{path:"/"});
+
+        req.rootUser.save();
+
+        res.status(201).json({status:201})
+
+    } catch (error) {
+        res.status(401).json({status:401,error})
+        console.log(error)
+    }
+    
+
+}
+
+// all users 
+
+exports.getUsers = async(req,res) =>{
+    try {
+        let user = await users.find()
+        res.status(201).json(user)
+        console.log(user)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+// particular user

@@ -4,7 +4,11 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
-    name:{
+    fname:{
+        type:String,
+        required:true
+    },
+    lname:{
         type:String,
         required:true
     },
@@ -18,37 +22,45 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    profile:{
-        type:String,
-        required:true,
-    },
     role:{
         type:String,
         default:"user"
     },
-    resetPasswordToken: String,
-    resetPasswordExpire: Date
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: true,
+            }
+        }
+    ]
+    // resetPasswordToken: String,
+    // resetPasswordExpire: Date
 })
 
-userSchema.pre("save", async function(next){
 
-    if(!this.isModified("password")){
-        next()
+userSchema.pre("save", async function (next) {
+
+    if (this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 12);
     }
-    else{
-        this.password = await bcrypt.hash(this.password,10)
+    next()
+});
+
+
+// token generate
+userSchema.methods.generateAuthtoken = async function () {
+    try {
+        let token23 = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+            expiresIn: "1d"
+        });
+
+        this.tokens = this.tokens.concat({ token: token23 });
+        await this.save();
+        return token23;
+    } catch (error) {
+        res.status(422).json(error)
     }
-})
-
-// JWT TOKEN
-userSchema.methods.getJWTToken = function(){
-    return jwt.sign({id:this._id}, process.env.JWT_SECRET,{
-        expiresIn: process.env.JWT_EXPIRE
-    })
-}
-
-userSchema.methods.comparePassword = async function(epassword){
-    return await bcrypt.compare(epassword, this.password)
 }
 
 const users = new mongoose.model('ecom_user', userSchema)
