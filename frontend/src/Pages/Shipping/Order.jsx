@@ -52,7 +52,7 @@ const Order = () => {
                 <>
                   <div className="cart_order">
                     <img
-                      src="https://cdn.shopify.com/s/files/1/0906/2558/products/07_2367a931-b52d-41ff-b242-f197329f398b.jpg?v=1677068145"
+                      src={e.image}
                       alt=""
                     />
                       <h3>{e.name}</h3>

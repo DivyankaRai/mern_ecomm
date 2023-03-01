@@ -8,6 +8,38 @@
     margin-right: 3%;
 }
 
+.admain{
+    width: 100%;
+    height: 580px;
+}
+.icondiv{
+    width: 90%;
+    height: auto;
+    /* border: 2px solid red; */
+    margin: auto;
+    /* margin-top: 15%; */
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 60px;
+}
+.icondiv .div{
+    width: 100%;
+    height: 350px;
+    border: 2px solid red;
+    margin-top: 39%;
+    background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIQA6wMBIgACEQEDEQH/xAAXAAADAQAAAAAAAAAAAAAAAAAAAgMB/8QAGRABAQEBAQEAAAAAAAAAAAAAABEBEgIh/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAECAwf/xAAXEQEBAQEAAAAAAAAAAAAAAAAAERIB/9oADAMBAAIRAxEAPwCGeTcnzybPKPQudJnlsPy3kapI2HjcwWpwRSCBU4IpG8hUoIpG8hU4IeN5CpQRSCBU4IpBAqcEUggVOCKQQKnBuKQchU4yKRnIVLfLOVt8l3yM96jvkvK2+WQSrZ5bnk+YbPKxjRI2HjeSLU43lTkchU4IpyOQqfLZD55byQqfI5U5ECp8jlSCBU+RypBAqfI5UggVPkcqQckKnyyKwchUoIpyOQqfLIryzkKlvlm+VoXcRKlvkvK0ZyJVcxuYfMbG3OkzGw+Y3lFpIIeCLFpI2GhuSFTginI5IVOCKcjkhU4IpyOSFTginI5IVOCKcjkhU4IpyOSFTginI5IVKCKcshCkgh4IQqcZFORyRKjvlkW5LyiVXMbmNzD5iudJmNho2C0kEPGwKTkQ8HIUkEPBApIIeCBSQQ8ECkgh4IFJBDwQKSCHggUkEPBApIyKciBU4IeCBU4NxSM3AqUZFNxkEqmZ8bmNzD5jNc6WNhoIVaWCHghSk5bDQQpSwQ0EKUsENBClLBDQQpSwQ0EKUsENBClLBDQQpSwQ0EKUkHJ4IUpIIeMhSkjNxTcZuFKnuFim4yFSqZjY3MNmMVzrIOTQ0KtJBmHghTReRyaCFWl5HJoIUpeRyeMhSl5HJ8wQpScjk8EKUnI5PBClJyOTwQpScjk0bClJyOTxkKmiRnKkEKaTjNxTcZuFKnuFim4WFSqZhswYfGK51mY2Njcwq0sbDRsKUkEPBClJBFIIU0nBFIIU0nBFIIU0nBFIIU0nBFIIU0nyIeNhTScEUjIU0SCHghSpwQ8ZClJC7im4yFSp7hYppYUpsPmM84fMc65VuNgNmFWsENGwpSiHzyIaWkgho2FKWMinLIUpIIeCFKWM3FORDRU8wRSCGipwRSMhopIIaNhSkjIpGQ0UkYeMKlJuF3FC6Uqe4U+lhUrfKmAMM8MYAVuNABoARWwMCjWgAAAgwAA0AAwMANYAoGAACgCF0oAE9FAEf//Z');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.icondiv .div h2{
+    margin-top: 27px;
+}
+.icondiv .div img{
+    width: 70%;
+    height: 65%;
+    margin-left: 15%;
+    margin-top: 10%;
+}
 .opt{
     visibility: hidden;
     /* display: none; */
@@ -55,6 +87,7 @@
 .s2 h3{
     font-size: 22px;
 }
+
 @media only screen and (max-width:350px)  {
     .pro_maind{
          display: block;

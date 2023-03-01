@@ -198,7 +198,7 @@ const Products = () => {
                 <i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
                 <i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
                 </div>
-                <p>MRP: ₹{e.price}</p>
+                <p style={{fontWeight: "600"}}>MRP: ₹{e.price}</p>
               </div>
             </>
           );

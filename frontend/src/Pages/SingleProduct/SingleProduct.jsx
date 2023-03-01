@@ -19,6 +19,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const SingleProduct = () => {
+
+  
   const nav = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((store) => store.cart.cartItems);

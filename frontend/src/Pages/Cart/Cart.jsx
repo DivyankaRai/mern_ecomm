@@ -13,6 +13,9 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((store) => store.cart.cartItems);
+  const cartlength = JSON.parse(localStorage.getItem('cart')) || []
+
+  console.log(cart)
 
   const user = useSelector((store) => store.login);
   const nav = useNavigate();
@@ -31,8 +34,11 @@ const Cart = () => {
     dispatch(addCartItems(id, newquan));
   };
 
-  const subtotal = cart.reduce((acc, e) => acc + e.quantity * e.price, 0);
-  // console.log(subtotal);
+  let subtotal;
+
+  if(cart){
+     subtotal = cart.reduce((acc, e) => acc + e.quantity * e.price, 0);
+  }
 
   const ship = () => {
     if (user) {
@@ -54,7 +60,8 @@ const Cart = () => {
     <>
     {
       spin ? <Loader/>: 
-      <div className="fir_div">
+      <>
+      <div className="fir_div" style={cartlength.length == 0 ? {display : 'none'} : {display : 'flex'}  }>
       <div className="bagsumm">
         <h1>Bag Summary</h1>
         {cart.length > 0 ? (
@@ -63,7 +70,7 @@ const Cart = () => {
               <>
                 <div className="cart">
                   <img
-                    src="https://cdn.shopify.com/s/files/1/0906/2558/products/07_2367a931-b52d-41ff-b242-f197329f398b.jpg?v=1677068145"
+                    src={e.image}
                     alt=""
                   />
                   <div className="pri">
@@ -77,7 +84,7 @@ const Cart = () => {
                       onClick={() => {
                         incQuantity(e);
                       }}
-                      style={{ color: " #fc2779", fontSize: "25px" }}
+                      style={{ color: " #fc2779", fontSize: "20px" }}
                     ></i>
                     <h2>{e.quantity}</h2>
                     <i
@@ -85,7 +92,7 @@ const Cart = () => {
                       onClick={() => {
                         decQuantity(e);
                       }}
-                      style={{ color: " #fc2779", fontSize: "25px" }}
+                      style={{ color: " #fc2779", fontSize: "20px"}}
                     ></i>
                   </div>
                   <i
@@ -93,15 +100,17 @@ const Cart = () => {
                     onClick={() => {
                       dispatch(removeCartItems(e._id));
                     }}
-                    style={{ color: "gray", fontSize: "29px" }}
+                    style={{ color: "black", fontSize: "26px" }}
                   ></i>
                 </div>
               </>
             );
           })
-        ) : "Your Shopping Bag is Empty"}
+        ) : <>
+         
+        </>}
       </div>
-      <div className="priDet">
+      <div className="priDet" >
         <h1>Price Details</h1>
         <div className="prid">
         <div className="cartpri">
@@ -121,6 +130,12 @@ const Cart = () => {
       </div>
 
     </div>
+          <div className="gif"  style={cartlength.length > 0 ? {display : 'none'} : {display : 'block'}} onClick={()=>{nav('/pro')}}>
+            <img src='https://media.tenor.com/iFi3jJDlevMAAAAi/shopping-buy.gif' />
+            <h2>Your shopping bag is Empty</h2>
+            <h3>Start Shopping &nbsp;<i class="fa-solid fa-cart-shopping"></i></h3>
+          </div>
+    </>
     }
     </>
   );

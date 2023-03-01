@@ -19,7 +19,8 @@ router.delete('/delete/product/:id',isAuth,  authorization("admin"), controller.
 router.post("/user/register",usercontroller.registerUser)
 router.post("/user/login", usercontroller.loginUser)
 router.get("/user/logout", isAuth, usercontroller.logoutUser)
-router.get("/user/details",isAuth, authorization("admin"), usercontroller.getUsers)
+router.get("/user/details",isAuth, usercontroller.getUsers)
+router.delete('/delete/user/:id',isAuth, authorization("admin"), usercontroller.deleteUser)
 router.get("/validuser",isAuth,async(req,res)=>{
     try {
         const ValidUserOne = await userdb.findOne({_id:req.userId});

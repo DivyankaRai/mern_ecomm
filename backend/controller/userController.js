@@ -103,9 +103,9 @@ exports.logoutUser = async(req,res,next) => {
 
 exports.getUsers = async(req,res) =>{
     try {
-        let user = await users.find()
+        let user = await userdb.find()
         res.status(201).json(user)
-        console.log(user)
+        // console.log(user)
     } catch (error) {
         console.log(error)
     }
@@ -113,3 +113,15 @@ exports.getUsers = async(req,res) =>{
 
 
 // particular user
+exports.deleteUser = async(req,res) => {
+
+    const {id} = req.params 
+
+    try {
+        await userdb.findByIdAndDelete({_id:id},{new:true})
+        res.status(200).json("sucessfully deleted")
+    } catch (error) {
+        console.log(error)
+    }
+
+}

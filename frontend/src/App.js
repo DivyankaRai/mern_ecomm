@@ -1,4 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./component/header/Navbar";
 import NavSecond from "./component/header/NavSecond";
@@ -20,6 +20,11 @@ import Payment from './Pages/Payment';
 import store from './store'
 import ProForm from "./Admin/AdminPages/ProForm";
 import AdminPanel from "./Admin/AdminPages/AdminPanel";
+import AdminEdit from "./Admin/AdminPages/AdminEdit";
+import AllUsers from "./Admin/AdminPages/AllUsers";
+import { getUserSuccess } from "./Admin/Redux/AdminAction";
+import MainPage from "./Admin/AdminPages/MainPage";
+import Atm from "./Atm";
 
 
 function App() {
@@ -29,7 +34,7 @@ function App() {
   const {login,isAuthenticated} = useSelector(store => store.login)
 
 
-  console.log(login,isAuthenticated)
+
   useEffect(() => {
     dispatch(getUserData(token))
   }, [])
@@ -42,6 +47,9 @@ function App() {
       <Routes>
       <Route path='/adminform' element={<ProForm/>}/>
         <Route path='/admin' element={<AdminPanel/>}/>
+        <Route path="/landing" element={<MainPage/>}/>
+        <Route path='/users' element={<AllUsers/>}/>
+        <Route path="/admin/edit/product/:id" element={<AdminEdit /> } />
         <Route path='/login' element={<Login/>}/>
         <Route path="/shipping" element={<Shipping /> } /> 
         <Route path="/" element={<Home /> } />

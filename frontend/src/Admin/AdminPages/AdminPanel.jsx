@@ -17,7 +17,9 @@ const AdminPanel = () => {
   const nav = useNavigate()
 
 
+  const user = useSelector(store => store.login.login)
   const product = useSelector((store) => store.products.products);
+  let token = localStorage.getItem("usersdatatoken");
   const dispatch = useDispatch();
 
   const getTodos = () => {
@@ -33,17 +35,22 @@ const AdminPanel = () => {
       });
   };
 
-  console.log(category)
-
-
   const deleteProduct = async(id) => {
+    console.log(id)
     try {
-      // const delData = 
+      const delData = axios.delete(`http://localhost:8000/delete/product/${id}`, {
+                  headers: {
+                      authorization: token,
+                     role: user.role
+                  },
+                })
+                toast("Product deleted Successfully")
+                getTodos()
+      console.log(delData)
     } catch (error) {
-      
+      console.log(error)
     }
   }
-
   
   useEffect(() => {
     getTodos();
@@ -209,13 +216,12 @@ const AdminPanel = () => {
                         style={{ color: "blue", fontSize: "21px" }}
                       ></i>
                     </Link>
+                    <Link to={`edit/product/${e._id}`}>
                     <i
                       class="fa-solid fa-edit"
-                      // onClick={() => {
-                      //   decQuantity(e);
-                      // }}
                       style={{ color: "green", fontSize: "21px" }}
                     ></i>
+                    </Link>
                     <i
                       class="fa-solid fa-trash"
                       onClick={() => {
