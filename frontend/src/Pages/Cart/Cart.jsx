@@ -17,7 +17,7 @@ const Cart = () => {
 
   console.log(cart)
 
-  const user = useSelector((store) => store.login);
+  const {login,isAuthenticated} = useSelector((store) => store.login);
   const nav = useNavigate();
 
   const incQuantity = (e) => {
@@ -40,8 +40,10 @@ const Cart = () => {
      subtotal = cart.reduce((acc, e) => acc + e.quantity * e.price, 0);
   }
 
+  console.log(login,isAuthenticated)
+
   const ship = () => {
-    if (user) {
+    if (isAuthenticated != undefined) {
       nav("/shipping");
     } else {
       nav("/signup");
@@ -61,14 +63,14 @@ const Cart = () => {
     {
       spin ? <Loader/>: 
       <>
-      <div className="fir_div" style={cartlength.length == 0 ? {display : 'none'} : {display : 'flex'}  }>
+      <div className="fir_div" style={cartlength.length == 0 ? {display : 'none'} : {display : ''}  }>
       <div className="bagsumm">
         <h1>Bag Summary</h1>
         {cart.length > 0 ? (
           cart.map((e) => {
             return (
               <>
-                <div className="cart">
+                <div className="cartpg">
                   <img
                     src={e.image}
                     alt=""
@@ -78,13 +80,13 @@ const Cart = () => {
                     <h4>MRP: ₹{e.price}</h4>
                     <h5>{`Sub-total: ₹${e.price * e.quantity}`}</h5>
                   </div>
-                  <div className="btnss">
+                  <div className="btnsspg">
                     <i
                       class="fa-solid fa-square-plus"
                       onClick={() => {
                         incQuantity(e);
                       }}
-                      style={{ color: " #fc2779", fontSize: "20px" }}
+                      style={{ color: " #fc2779", fontSize: "19px" }}
                     ></i>
                     <h2>{e.quantity}</h2>
                     <i
@@ -92,16 +94,17 @@ const Cart = () => {
                       onClick={() => {
                         decQuantity(e);
                       }}
-                      style={{ color: " #fc2779", fontSize: "20px"}}
+                      style={{ color: " #fc2779", fontSize: "19px"}}
                     ></i>
-                  </div>
-                  <i
+                    <i
                     class="fa-solid fa-trash"
                     onClick={() => {
                       dispatch(removeCartItems(e._id));
                     }}
-                    style={{ color: "black", fontSize: "26px" }}
+                    id="tss"
+                    style={{ color: "black", fontSize: "24px" }}
                   ></i>
+                  </div>
                 </div>
               </>
             );

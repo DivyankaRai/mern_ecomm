@@ -30,8 +30,7 @@ const Products = () => {
 
     return axios
       .get(`https://glowgirlbackend.onrender.com/products?search=${search}&category=${category}&sort=${sort}`)
-      .then((res) => {
-        // console.log(object)
+      .then((res) => {                                      
         dispatch(getProductsSuccess(res.data));
       })
       .catch((err) => {

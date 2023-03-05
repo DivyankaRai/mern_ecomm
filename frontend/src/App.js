@@ -25,6 +25,7 @@ import AllUsers from "./Admin/AdminPages/AllUsers";
 import { getUserSuccess } from "./Admin/Redux/AdminAction";
 import MainPage from "./Admin/AdminPages/MainPage";
 import Atm from "./Atm";
+import My from "./My";
 
 
 function App() {
@@ -45,12 +46,18 @@ function App() {
     <NavSecond/>
     {/* <Order/> */}
       <Routes>
-      <Route path='/adminform' element={<ProForm/>}/>
-        <Route path='/admin' element={<AdminPanel/>}/>
+      {
+        isAuthenticated == true ?( <>
+          <Route path='/adminform' element={<ProForm/>}/>
+          <Route path='/admin' element={<AdminPanel/>}/> 
+        </>) : (<Route path='/login' element={<Login/>}/>)
+      }
+       <Route path='/adminform' element={<ProForm/>}/>
+         <Route path='/admin' element={<AdminPanel/>}/>
         <Route path="/landing" element={<MainPage/>}/>
         <Route path='/users' element={<AllUsers/>}/>
         <Route path="/admin/edit/product/:id" element={<AdminEdit /> } />
-        <Route path='/login' element={<Login/>}/>
+        {/* <Route path='/login' element={<Login/>}/> */}
         <Route path="/shipping" element={<Shipping /> } /> 
         <Route path="/" element={<Home /> } />
         <Route path="/pro" element={<Products /> } />

@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { getSignupFailure, getSignupRequest, getSignupSuccess } from "../../redux/SignUp/signaction";
 
@@ -92,7 +92,7 @@ const Signup = () => {
         <input  className="input" name='password' type="text"  placeholder="Enter Your Password" style={{fontSize: "17px", textAlign:"center"}}  onChange={handleChange} />
         <br />
         <button className="buton" type='submit' onClick={handleSubmit} >Signup</button>
-        <h5>Don't have an account?</h5>
+        <h5>Already have an account? <Link to='/login' style={{ color:"black"}}><span style={{ color:"black"}}>Login</span></Link></h5>
         <ToastContainer position="top-center"/>
       </div>
       )

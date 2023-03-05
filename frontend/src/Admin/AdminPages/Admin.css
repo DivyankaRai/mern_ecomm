@@ -1,4 +1,44 @@
 .bagg{
+    width: 70%;
+    /* margin-top: 25%; */
+    /* display: grid; */
+    /* grid-template-columns: repeat(1,1fr); */
+}
+.cartadmin{
+    display: flex;
+    margin-top: 3%;
+    height: 120px;
+    /* border: 2px solid red; */
+    padding-bottom: 30px;
+    margin-bottom: 27px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.cartadmin img{
+    width: 20%;
+    height: 118px;
+}
+.priadmin{
+    text-align: center;
+    /* border: 2px solid red; */
+    height: 90%;
+    width: 40%;
+    margin-top: 12px;
+    margin-left: 5%;
+}
+.priadmin h3{
+    font-size: 19px;
+}
+.priadmin h4{
+    font-size: 15px;
+    margin-top: 5px;
+}
+.btnss{
+    margin: auto;
+    margin-top: 3%;
+}
+
+
+.bagg{
     width:70%;
     margin:auto;
     grid-template-columns: repeat(3,1fr);
@@ -152,6 +192,44 @@
         color: white; */
         border: none;
     }
+
+    .bagg{
+        width:90%;
+        margin:auto;
+        grid-template-columns: repeat(1,1fr);
+        /* border: 1px solid red; */
+        gap:20px;
+        margin-top: 6%;
+        margin-right: 3%;
+    }
+    .cartadmin{
+        display: block;
+        /* border: 2px solid red; */
+        height: auto;
+        margin-bottom: 27px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+    .cartadmin img{
+        width: 100%;
+        height: 60%;
+    }
+    .priadmin{
+        width: 95%;
+        text-align: center;
+        /* border: 2px solid red; */
+        margin-left: 2%;
+        height: auto;
+        margin-top: 0.5px;
+    }
+    .priadmin h3{
+        font-size: 16px;
+    }
+    .btnss{
+        height: 10%;
+        margin: auto;
+        /* border: 2px solid red; */
+    }
+
 }
 @media only screen and (min-width:351px) and (max-width:540px){
 
@@ -227,6 +305,43 @@
 .main>div h2{
     font-size: 17px;
    }
+   .bagg{
+    width:95%;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    border: 1px solid red;
+    gap:30px;
+    margin-top: 6%;
+    margin-right: 3%;
+}
+.cartadmin{
+    display: block;
+    height: auto;
+    border: 2px solid red;
+    padding-bottom: 30px;
+    margin-bottom: -5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.cartadmin img{
+    width: 100%;
+    height: 60%;
+}
+.priadmin{
+    width: 90%;
+    height: auto;
+    text-align: center;
+}
+.priadmin h3{
+    font-size: 16px;
+}
+.priadmin h4{
+    font-size: 13px;
+    margin-top: 5px;
+}
+.btnss{
+    margin: auto;
+}
 }
 @media only screen and (min-width:541px) and (max-width:800px){
     .pro_maind{
@@ -240,7 +355,7 @@
        margin: auto;
        display: block;
        justify-content: space-around;
-       margin-top: 14%;
+       margin-top: 11%;
        padding-bottom: 3%;
        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
    }
@@ -267,9 +382,51 @@
    label{
     font-size: 15px;
    }
+   .bagg{
+    width:65%;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    border: 1px solid red;
+    gap:30px;
+    margin-top: 10.5%;
+    margin-right: 3%;
+}
+.cartadmin{
+    display: block;
+    height: 370px;
+    /* border: 2px solid red; */
+    padding-bottom: 40px;
+    margin-bottom: -6px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.cartadmin img{
+    width: 100%;
+    height: 70%;
+}
+.priadmin{
+    width: 90%;
+    height: auto;
+    margin-left: 1px;
+    text-align: center;
+    margin-top: 1PX;
+    border: 2px solid red;
+}
+.priadmin h3{
+    font-size: 16px;
+}
+.priadmin h4{
+    font-size: 13px;
+    margin-top: 5px;
+}
+.btnss{
+    margin: auto;
+    /* border: 2px solid red; */
+}
 }
 
 @media only screen and (min-width:801px) and (max-width:940px){
+    
     .pro_maind{
         display: flex;
         width: 95%;
@@ -282,7 +439,7 @@
        display: block;
        justify-content: space-around;
        position: fixed;
-       margin-top: 12%;
+       margin-top: 9%;
        padding-bottom: 3%;
        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
    }

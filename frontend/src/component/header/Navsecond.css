@@ -20,6 +20,9 @@
     align-items: center;
     flex: 1;
 }
+Link{
+    text-decoration: none;
+}
 
 .new_nav .nav_data .left_data p{
     color: black;
@@ -27,6 +30,7 @@
     font-size: 17px;
     margin-top: 14px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 /* media query */

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import "./Navsecond.css"
 
 const NavSecond = () => {
@@ -6,8 +7,8 @@ const NavSecond = () => {
     <div className='new_nav'>
       <div className="nav_data">
         <div className="left_data">
-          
-            <p>Categories</p>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Categories</p></Link>
+            
             <p>Beauty Advice</p>
             <p>Brands</p>
             <p>Makeup</p>

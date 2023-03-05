@@ -56,9 +56,6 @@ const AdminPanel = () => {
     getTodos();
   }, [category,sort]);
 
-
-
-
   return (
     <>
        <div className='pro_maind'>
@@ -200,12 +197,12 @@ const AdminPanel = () => {
         {product.map((e, i) => {
           return (
             <>
-              <div className="cart">
+              <div className="cartadmin">
                   <img
                     src={e.images}
                     alt=""
                   />
-                  <div className="pri">
+                  <div className="priadmin">
                     <h3>{e.name}</h3>
                     <h4>MRP: ₹{e.price}</h4>
                   </div>

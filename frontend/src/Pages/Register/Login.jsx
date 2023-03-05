@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux'
 import "./Login.css";
 import { getLoginFailure, getLoginRequest, getLoginSuccess, getUserData } from "../../redux/Login/loginAction";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
@@ -90,7 +90,7 @@ const Login = () => {
         <input className="input" name="password" type="text" placeholder="Enter Your Password" style={{fontSize: "17px", textAlign:"center"}} onChange={handleChange} />
         {/* <br /> */}
         <button className="buton" onClick={handleSubmit}>Login</button>
-        <h5>Already have an account?</h5>
+        <h5 >Don't have an account? <Link to='/signup' style={{ color:"black"}}><span style={{ color:"black"}}>Sign-in</span></Link></h5>
         <ToastContainer position="top-center"/>
       </div>
        )}
