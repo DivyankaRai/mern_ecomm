@@ -1,4 +1,4 @@
-import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_FAILURE, GET_USER_DATA, LOGOUT_USER } from "./loginActionType";
+import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_FAILURE, GET_USER_DATA, LOGOUT_USER, GET_ORDER_DATA } from "./loginActionType";
 import axios from 'axios'
 
 export const getLoginRequest = () =>{
@@ -35,7 +35,23 @@ export const getUserData = (token) => async(dispatch) =>{
         type: GET_USER_DATA,
         payload: data.ValidUserOne
     })
-    // localStorage.setItem("user", JSON.stringify(userdata))
+
+}
+
+export const getOrderData = (token,id) => async(dispatch) =>{
+
+    const {data} = await axios.get(`http://localhost:8000/order/${id}`,{
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": token
+        },
+    })
+    console.log(data)
+    dispatch({
+        type: GET_ORDER_DATA,
+        payload: data
+    })
+
 }
 
 export const getLogoutUser = () =>{

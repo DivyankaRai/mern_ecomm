@@ -10,12 +10,10 @@ import Login from './Pages/Register/Login';
 import Signup from './Pages/Register/Signup';
 import Cart from './Pages/Cart/Cart';    
 import Shipping from './Pages/Shipping/Shipping';
-import Dash from './Dash';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserData } from './redux/Login/loginAction';
 import { useEffect, useState } from 'react';
 import Order from './Pages/Shipping/Order';
-import axios from 'axios';
 import Payment from './Pages/Payment';
 import store from './store'
 import ProForm from "./Admin/AdminPages/ProForm";
@@ -24,8 +22,7 @@ import AdminEdit from "./Admin/AdminPages/AdminEdit";
 import AllUsers from "./Admin/AdminPages/AllUsers";
 import { getUserSuccess } from "./Admin/Redux/AdminAction";
 import MainPage from "./Admin/AdminPages/MainPage";
-import Atm from "./Atm";
-import My from "./My";
+import Account from "./Pages/Account/Account";
 
 
 function App() {
@@ -43,7 +40,6 @@ function App() {
   return (
     <>
     <Navbar user={{login,isAuthenticated}} />
-    <NavSecond/>
     {/* <Order/> */}
       <Routes>
       {
@@ -53,11 +49,12 @@ function App() {
         </>) : (<Route path='/login' element={<Login/>}/>)
       }
        <Route path='/adminform' element={<ProForm/>}/>
+       <Route path='/account' element={<Account/>}/>
          <Route path='/admin' element={<AdminPanel/>}/>
         <Route path="/landing" element={<MainPage/>}/>
         <Route path='/users' element={<AllUsers/>}/>
         <Route path="/admin/edit/product/:id" element={<AdminEdit /> } />
-        {/* <Route path='/login' element={<Login/>}/> */}
+        <Route path='/login' element={<Login/>}/>
         <Route path="/shipping" element={<Shipping /> } /> 
         <Route path="/" element={<Home /> } />
         <Route path="/pro" element={<Products /> } />

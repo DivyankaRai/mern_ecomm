@@ -7,6 +7,7 @@ import { Loader } from "../../component/./Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { getSignupFailure, getSignupRequest, getSignupSuccess } from "../../redux/SignUp/signaction";
+import NavSecond from "../../component/header/NavSecond";
 
 const Signup = () => {
 
@@ -14,6 +15,8 @@ const Signup = () => {
   const nav = useNavigate()
   const [spin, setspin] = useState(true);
   const {isAuthenticated} = useSelector((store) => store.signUp)
+
+  const [image, setimage] = useState("");
 
   const [sdata, setsdata] = useState({
     fname:"",
@@ -29,6 +32,11 @@ const Signup = () => {
     }
   // console.log(sdata)
 
+  const setProfile = (e) => {
+    setimage(e.target.files[0]);
+  };
+
+  console.log(image)
   const handleSubmit = async(e) =>{
 
     e.preventDefault();
@@ -46,14 +54,20 @@ const Signup = () => {
       toast.error("Please enter your password")
     }
     else{
+      const data = new FormData();
+      data.append("fname", fname);
+      data.append("lname", lname);
+      data.append("email", email);
+      data.append("password", password);
+      data.append("user_profile", image);
       const config = {
         headers:{
-          "Content-Type": "application/json"
+          "Content-Type": "multipart/form-data",
         }
       }
       dispatch(getSignupRequest())
       axios.post('http://localhost:8000/user/register',
-        {fname,lname,email,password},
+        data,
         config
       ).then((res) => {
         console.log(res)
@@ -66,21 +80,21 @@ const Signup = () => {
     }
   }
 
+  
   useEffect(() => {
     setTimeout(() => {
       setspin(false);
     }, 1300);
-    if(isAuthenticated){
-      toast('Signup Successfully')
-    }
-  }, [isAuthenticated,dispatch])
+  }, [])
 
   return (
     <>
+    <NavSecond/>
     {
       spin ? (
         <Loader />
       ) : (
+        <>
         <div className="login_div">
         <h1>SignUp</h1>
         <input className="input" name='fname' type="text"  placeholder="Enter Your First Name" style={{fontSize: "17px", textAlign:"center"}}  onChange={handleChange} />
@@ -90,11 +104,14 @@ const Signup = () => {
         <input className="input" name='email' type="text"  placeholder="Enter Your Email" style={{fontSize: "17px", textAlign:"center"}}  onChange={handleChange} />
         <br /><br />
         <input  className="input" name='password' type="text"  placeholder="Enter Your Password" style={{fontSize: "17px", textAlign:"center"}}  onChange={handleChange} />
-        <br />
+        <br /><br/>
+        <input name="user_profile"
+        onChange={setProfile} type='file' placeholder="Choose Profile picture" className="input" style={{fontSize: "17px", textAlign:"center",backgroundColor:"white"}} /><br/>
         <button className="buton" type='submit' onClick={handleSubmit} >Signup</button>
         <h5>Already have an account? <Link to='/login' style={{ color:"black"}}><span style={{ color:"black"}}>Login</span></Link></h5>
         <ToastContainer position="top-center"/>
       </div>
+      </>
       )
     }
     </>

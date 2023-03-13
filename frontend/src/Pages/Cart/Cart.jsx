@@ -6,6 +6,7 @@ import "./cart.css";
 import { getUserData } from "../../redux/Login/loginAction";
 import axios from "axios";
 import { Loader } from "../../component/Loading";
+import NavSecond from "../../component/header/NavSecond";
 
 const Cart = () => {
 
@@ -13,6 +14,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((store) => store.cart.cartItems);
+  console.log(cart)
   const cartlength = JSON.parse(localStorage.getItem('cart')) || []
 
   console.log(cart)
@@ -60,6 +62,7 @@ const Cart = () => {
 
   return (
     <>
+     <NavSecond/>
     {
       spin ? <Loader/>: 
       <>

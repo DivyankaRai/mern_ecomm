@@ -6,7 +6,7 @@ const { isAuth } = require('../middleware/authentication')
 const orderController = require('../controller/ordercontroller')
 const { authorization } = require('../middleware/authorization')
 const userdb = require('../models/userShema')
-var bcrypt = require("bcryptjs");
+const upload = require("../multerconfig/storageconfig")
 
 //  product routes
 router.get('/products', controller.getProducts)
@@ -16,7 +16,7 @@ router.put('/update/product/:id',isAuth, authorization("admin"), controller.upda
 router.delete('/delete/product/:id',isAuth,  authorization("admin"), controller.deleteProduct)
 
 // user routes
-router.post("/user/register",usercontroller.registerUser)
+router.post("/user/register",upload.single("user_profile"),usercontroller.registerUser)
 router.post("/user/login", usercontroller.loginUser)
 router.get("/user/logout", isAuth, usercontroller.logoutUser)
 router.get("/user/details",isAuth, usercontroller.getUsers)

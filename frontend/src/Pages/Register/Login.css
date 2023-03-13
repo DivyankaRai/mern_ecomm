@@ -12,6 +12,17 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+input::file-selector-button {
+    font-weight:500;
+    color: rgb(129, 127, 127);;
+    padding: 0.7em;
+    width: 50%;
+    background-color: white;
+    margin-left: 0.5%;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
 .login_div h1{
     /* margin-left: 17%; */
     /* color: #fc2779; */

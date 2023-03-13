@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
 import axios from "axios";
 import { getProductsFailure, getProductsRequest, getProductsSuccess } from '../../redux/Products/productAction';
+import SmallNav from './SmallNav';
 
 const AdminPanel = () => {
 
@@ -58,6 +59,7 @@ const AdminPanel = () => {
 
   return (
     <>
+    <SmallNav/>
        <div className='pro_maind'>
     <div className="sorted">
         <div className="s2">

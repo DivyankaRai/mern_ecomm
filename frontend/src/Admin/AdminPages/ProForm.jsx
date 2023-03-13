@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
 import axios from "axios";
 import { addProductFailure, addProductRequest, addProductSuccess } from "../Redux/AdminAction";
+import NavSecond from "../../component/header/NavSecond";
+import SmallNav from "./SmallNav";
 
 const ProForm = () => {
 
@@ -86,6 +88,7 @@ const ProForm = () => {
 
   return (
     <>
+    <SmallNav/>
       {spin ? (
         <Loader />
       ) : (

@@ -14,6 +14,7 @@ import {
 import { addCartItems } from "../../redux/Cart/CartAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NavSecond from "../../component/header/NavSecond";
 
 
 
@@ -79,6 +80,8 @@ const SingleProduct = () => {
       {spin ? (
         <Loader />
       ) : (
+        <>
+        <NavSecond/>
         <div className="s_main">
           <div className="s_img">
             <img src={product.images} alt="" />
@@ -93,7 +96,7 @@ const SingleProduct = () => {
               </h4>
               <h4>MRP: &nbsp;&nbsp;₹ <span>{product.price}</span></h4>
               <p>inclusive of all taxes</p>
-              <div className="btnss">
+              <div className="sbtnss">
                 <i
                   class="fa-solid fa-square-plus"
                   onClick={incQuantity}
@@ -116,6 +119,7 @@ const SingleProduct = () => {
           </div>
           <ToastContainer position="top-center"/>
         </div>
+        </>
       )}
     </>
   );

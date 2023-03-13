@@ -4,7 +4,10 @@ var bcrypt = require("bcryptjs");
 // register 
 exports.registerUser = async(req,res)=>{
 
+    const file = req.file.filename;
     const { fname,lname,email,password} = req.body;
+    console.log(fname,lname,email,password,file)
+    // console.log(fname,lname)
 
     if (!fname || !email || !password) {
         res.status(422).json({ error: "fill all the details" })
@@ -18,7 +21,7 @@ exports.registerUser = async(req,res)=>{
             res.status(422).json({ error: "This Email is Already Exist" })
         } else {
             const finalUser = new userdb({
-                fname,lname,email,password
+                fname,lname,email,password,profile:file
             });
 
             // here password hasing

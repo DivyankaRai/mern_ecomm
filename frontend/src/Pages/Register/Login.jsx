@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
+import NavSecond from "../../component/header/NavSecond";
 
 const Login = () => {
   
@@ -15,6 +16,8 @@ const Login = () => {
   const [spin, setspin] = useState(true);
   const dispatch = useDispatch()
   const {error,isAuthenticated} = useSelector(store => store.login)
+
+  console.log(isAuthenticated)
 
   const [data, setdata] = useState({
     email: "",
@@ -47,15 +50,16 @@ const Login = () => {
         }
         dispatch(getLoginRequest())
   
-        return axios.post('https://glowgirlbackend.onrender.com/user/login',
+        return axios.post('http://localhost:8000/user/login',
             {email,password},
             config
           ).then((res) => {
-            console.log(res.data.result.token)
+            console.log(res)
             dispatch(getLoginSuccess(res.data.result.userValid))
             if(res.status === 201){
               localStorage.setItem("usersdatatoken",res.data.result.token);
               toast('User logged in Successfully')
+              nav('/')
             }
           }).catch((err) => {
             console.log(err)
@@ -76,10 +80,13 @@ const Login = () => {
 
   return (
     <>
+    <NavSecond/>
     {
       spin ? (
         <Loader />
       ) : (
+        <>
+        
         <div className="login_div">
         <h1>Welcome back</h1>
         {/* <h4>Enter your Email</h4> */}
@@ -93,6 +100,7 @@ const Login = () => {
         <h5 >Don't have an account? <Link to='/signup' style={{ color:"black"}}><span style={{ color:"black"}}>Sign-in</span></Link></h5>
         <ToastContainer position="top-center"/>
       </div>
+      </>
        )}
     </>
   );

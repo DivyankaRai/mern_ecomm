@@ -6,6 +6,7 @@ import '../Register/Login.css'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
+import NavSecond from '../../component/header/NavSecond'
 
 const Shipping = () => {
 
@@ -50,9 +51,11 @@ useEffect(() => {
 
   return (
     <>
+    <NavSecond/>
       {spin ? (
         <Loader />
       ) : (
+        <>
         <div className="login_div">
         <h1>Address</h1>
         {/* <h4>Enter your City</h4> */}
@@ -70,6 +73,7 @@ useEffect(() => {
         <button className="buton" onClick={shippingSubmit} type='submit' >Proceed</button>
         <ToastContainer position="top-center"/>
       </div>
+      </>
       )}
     </>
   )

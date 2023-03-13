@@ -37,7 +37,7 @@
     /* border: 1px solid red; */
     text-align: left;
 }
-.s_main .info>.s_info .btnss{
+.s_main .info>.s_info .sbtnss{
     /* border: 1px solid red; */
     height: 50px;
     width: 25%;
@@ -47,7 +47,7 @@
     margin-top: 9px;
 
 }
-.s_main .info>.s_info .btnss i{
+.s_main .info>.s_info .sbtnss i{
     font-size: 25px;
 }
 .button{
@@ -165,7 +165,7 @@ h1{
         text-align: left;
         margin-left: 17px;
     }
-    .s_main .info>.s_info .btnss{
+    .s_main .info>.s_info .sbtnss{
         /* border: 1px solid red; */
         height: 50px;
         width: 30%;
@@ -254,7 +254,7 @@ h1{
         text-align: left;
         margin-left: 17px;
     }
-    .s_main .info>.s_info .btnss{
+    .s_main .info>.s_info .sbtnss{
         /* border: 1px solid red; */
         height: 50px;
         width: 30%;
@@ -269,7 +269,7 @@ h1{
     i{
         font-size: 14px;
     }
-    .s_main .info>.s_info .btnss i{
+    .s_main .info>.s_info .sbtnss i{
         font-size: 20px;
     }
     .button{
@@ -307,7 +307,7 @@ h1{
         height: 100%;
         /* border: 1px solid red; */
     }
-    .s_main .info>.s_info .btnss i{
+    .s_main .info>.s_info .sbtnss i{
         font-size: 20px;
     }
     i{

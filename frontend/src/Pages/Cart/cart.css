@@ -229,12 +229,22 @@
     }
     .cartpg .pri{
         /* border: 2px solid red; */
-        height: auto;
+        height: 95%;
         margin-left: 3%;
-        width: 42%;
+        width: 45%;
     }
-    .pri h3{
+    .cartpg .pri h3{
         margin-left: 1px;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .cartpg .pri h4{
+        margin-left: 1px;
+        font-size: 11px;
+    }
+    .cartpg .pri h5{
+        margin-left: 1px;
+        font-size: 11px;
     }
     .bagsumm{
         width: 100%;

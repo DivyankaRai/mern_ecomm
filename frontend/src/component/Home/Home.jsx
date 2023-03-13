@@ -6,6 +6,7 @@ import Carousel from 'react-multi-carousel';
 import { Loader } from '../Loading'
 import 'react-multi-carousel/lib/styles.css';
 import Carrousell from './Banner';
+import NavSecond from '../header/NavSecond';
 
 const Home = () => {
 
@@ -19,6 +20,7 @@ const Home = () => {
 
   return (
     <>
+     <NavSecond/>
     {
         spin ? <Loader/>: <>
         <Carrousell/>

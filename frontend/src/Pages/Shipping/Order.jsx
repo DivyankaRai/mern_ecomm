@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getUserData } from '../../redux/Login/loginAction'
 import { useNavigate } from 'react-router-dom';
 import "./order.css"
+import NavSecond from '../../component/header/NavSecond';
 
 const Order = () => {
 
@@ -37,6 +38,7 @@ const Order = () => {
 
   return (
     <>
+    <NavSecond/>
     <div className="s_add">
       <h1>Shipping Details</h1>
       <h2>Name : &nbsp;<span>{user.login.fname}</span></h2>
@@ -71,27 +73,6 @@ const Order = () => {
           </div>
           <button className='pbtnn'  onClick={() => {paymentt()}}> Proceed to Payment </button>
     </div>
-      {/* <div>
-        <h1>{user.fname}</h1>
-        <h1>{ship.phone}</h1>
-        <h1>{ship.address}</h1>
-      </div>
-      <div>
-        {
-            cart.map((e)=>{
-                return(
-                    <div style={{border:"1px solid red", display: 'flex'}}>
-                    <img src={e.image} alt='img'/>
-                    <h1>{e.name}</h1>
-                    <h1>{e.price}</h1>
-                    <h1>total:- {e.price*e.quantity}</h1>
-                    </div>
-                )
-            })
-        }
-      </div>
-      <h1> total - {subtotal}</h1>
-      <button onClick={() => {paymentt()}}>Proceed to payment</button> */}
     </>
   )
 }

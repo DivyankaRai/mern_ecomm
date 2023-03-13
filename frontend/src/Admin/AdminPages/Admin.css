@@ -65,7 +65,7 @@
 .icondiv .div{
     width: 100%;
     height: 350px;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     margin-top: 39%;
     background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIQA6wMBIgACEQEDEQH/xAAXAAADAQAAAAAAAAAAAAAAAAAAAgMB/8QAGRABAQEBAQEAAAAAAAAAAAAAABEBEgIh/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAECAwf/xAAXEQEBAQEAAAAAAAAAAAAAAAAAERIB/9oADAMBAAIRAxEAPwCGeTcnzybPKPQudJnlsPy3kapI2HjcwWpwRSCBU4IpG8hUoIpG8hU4IeN5CpQRSCBU4IpBAqcEUggVOCKQQKnBuKQchU4yKRnIVLfLOVt8l3yM96jvkvK2+WQSrZ5bnk+YbPKxjRI2HjeSLU43lTkchU4IpyOQqfLZD55byQqfI5U5ECp8jlSCBU+RypBAqfI5UggVPkcqQckKnyyKwchUoIpyOQqfLIryzkKlvlm+VoXcRKlvkvK0ZyJVcxuYfMbG3OkzGw+Y3lFpIIeCLFpI2GhuSFTginI5IVOCKcjkhU4IpyOSFTginI5IVOCKcjkhU4IpyOSFTginI5IVKCKcshCkgh4IQqcZFORyRKjvlkW5LyiVXMbmNzD5iudJmNho2C0kEPGwKTkQ8HIUkEPBApIIeCBSQQ8ECkgh4IFJBDwQKSCHggUkEPBApIyKciBU4IeCBU4NxSM3AqUZFNxkEqmZ8bmNzD5jNc6WNhoIVaWCHghSk5bDQQpSwQ0EKUsENBClLBDQQpSwQ0EKUsENBClLBDQQpSwQ0EKUkHJ4IUpIIeMhSkjNxTcZuFKnuFim4yFSqZjY3MNmMVzrIOTQ0KtJBmHghTReRyaCFWl5HJoIUpeRyeMhSl5HJ8wQpScjk8EKUnI5PBClJyOTwQpScjk0bClJyOTxkKmiRnKkEKaTjNxTcZuFKnuFim4WFSqZhswYfGK51mY2Njcwq0sbDRsKUkEPBClJBFIIU0nBFIIU0nBFIIU0nBFIIU0nBFIIU0nyIeNhTScEUjIU0SCHghSpwQ8ZClJC7im4yFSp7hYppYUpsPmM84fMc65VuNgNmFWsENGwpSiHzyIaWkgho2FKWMinLIUpIIeCFKWM3FORDRU8wRSCGipwRSMhopIIaNhSkjIpGQ0UkYeMKlJuF3FC6Uqe4U+lhUrfKmAMM8MYAVuNABoARWwMCjWgAAAgwAA0AAwMANYAoGAACgCF0oAE9FAEf//Z');
     background-repeat: no-repeat;
@@ -310,7 +310,7 @@
     margin:auto;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    border: 1px solid red;
+    /* border: 1px solid red; */
     gap:30px;
     margin-top: 6%;
     margin-right: 3%;
@@ -318,7 +318,7 @@
 .cartadmin{
     display: block;
     height: auto;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     padding-bottom: 30px;
     margin-bottom: -5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
@@ -387,7 +387,7 @@
     margin:auto;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    border: 1px solid red;
+    /* border: 1px solid red; */
     gap:30px;
     margin-top: 10.5%;
     margin-right: 3%;
@@ -410,7 +410,7 @@
     margin-left: 1px;
     text-align: center;
     margin-top: 1PX;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 .priadmin h3{
     font-size: 16px;
@@ -425,21 +425,23 @@
 }
 }
 
-@media only screen and (min-width:801px) and (max-width:940px){
+@media only screen and (min-width:801px) and (max-width:1040px){
     
     .pro_maind{
         display: flex;
-        width: 95%;
+        width: 99%;
         justify-content: space-between;
+        /* border: 2px solid red; */
+        margin-top: 9%;
    }
    .pro_maind .sorted{
-       width: 26%;
+       width: 24%;
        height: auto;
        margin: auto;
        display: block;
        justify-content: space-around;
        position: fixed;
-       margin-top: 9%;
+       margin-top: 7%;
        padding-bottom: 3%;
        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
    }
@@ -532,7 +534,7 @@
     width: 90%;
     height: 200px;
     margin-top: 5%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 .bag h1{
    font-size: 30px;

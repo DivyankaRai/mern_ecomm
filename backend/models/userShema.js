@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"user"
     },
+    profile:{
+        type:String,
+        required:true,
+    },
     tokens: [
         {
             token: {

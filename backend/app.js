@@ -10,15 +10,13 @@ require('./db/db')
 // const app = express()
 // dotenv.config({path:".env"})
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
 app.use(bodyParser.json())
 
 app.use(cookie())
 app.use(cors())
 app.use(router)
+app.use("/uploads", express.static("./uploads"))
 
 
 app.listen(8000,()=>{

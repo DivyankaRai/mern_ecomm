@@ -53,6 +53,7 @@ const Navbar = ({user,isAuthenticated}) => {
 
   // log out
   const logoutuser = async() => {
+    setloginopen(false)
     let token = localStorage.getItem("usersdatatoken");
     // console.log(token)
 
@@ -77,6 +78,7 @@ const Navbar = ({user,isAuthenticated}) => {
 }
 
   const admin = () => {
+    setloginopen(false)
     if(user.login.role === "admin"){
       nav('/admin')
     }
@@ -88,6 +90,11 @@ const Navbar = ({user,isAuthenticated}) => {
   const searchbox = () => {
     setopen(false)
     setsearch("")
+  }
+
+  const accountt = () =>{
+    setloginopen(false)
+    nav('/account')
   }
 
   console.log(drawer)
@@ -162,6 +169,9 @@ const Navbar = ({user,isAuthenticated}) => {
                 {
                   loginopen ? <>
                     <div className="loginbox">
+                      <div className="account" onClick={()=>{accountt()}} >
+                        <h1>My Account</h1>
+                      </div>
                       <div className="logout" onClick={()=>{logoutuser()}} >
                         <h1>Logout</h1>
                       </div>
@@ -173,7 +183,7 @@ const Navbar = ({user,isAuthenticated}) => {
                 }
               </>
                  : 
-              <Link to='/signup'><a>Signin</a></Link>
+              <Link to='/signup'><a>&nbsp;&nbsp;&nbsp;Signin</a></Link>
             }
           </div>
           <div className="cart_btn" >

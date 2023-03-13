@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserSuccess } from '../Redux/AdminAction';
 import './AllUser.css'
+import SmallNav from './SmallNav';
 
 const AllUsers = () => {
 
@@ -53,6 +54,7 @@ const AllUsers = () => {
 
   return (
     <>
+    <SmallNav/>
       <div className="users_main">
         {
             allUser.map((e,i)=>{

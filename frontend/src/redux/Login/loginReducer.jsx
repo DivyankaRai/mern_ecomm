@@ -1,6 +1,6 @@
-import { GET_LOGIN_FAILURE, GET_LOGIN_SUCCESS, GET_LOGIN_REQUEST, GET_USER_DATA, LOGOUT_USER } from "./loginActionType";
+import { GET_LOGIN_FAILURE, GET_LOGIN_SUCCESS, GET_LOGIN_REQUEST, GET_USER_DATA, LOGOUT_USER, GET_ORDER_DATA } from "./loginActionType";
 
-export const LoginReducer = (state= { login: {}}, action) => {
+export const LoginReducer = (state= { login: {}, order:[]}, action) => {
     switch (action.type) {
         case GET_LOGIN_REQUEST: {
             return {
@@ -31,6 +31,14 @@ export const LoginReducer = (state= { login: {}}, action) => {
                 isLoading: false,
                 isAuthenticated:true,
                 login:action.payload
+            }
+        }
+        case GET_ORDER_DATA:{
+            return {
+                ...state,
+                isLoading: false,
+                isAuthenticated:true,
+                order:action.payload
             }
         }
         case LOGOUT_USER:{

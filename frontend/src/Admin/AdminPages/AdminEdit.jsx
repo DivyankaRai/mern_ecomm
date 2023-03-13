@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
 import axios from "axios";
+import SmallNav from "./SmallNav";
 import { singleProductSuccess } from "../../redux/SingleProduct/singleProductAction";
 import { editProductSuccess } from "../Redux/AdminAction";
 
@@ -100,6 +101,7 @@ const AdminEdit = () => {
 
   return (
     <>
+    <SmallNav/>
       {spin ? (
         <Loader />
       ) : (
