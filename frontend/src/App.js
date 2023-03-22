@@ -23,6 +23,8 @@ import AllUsers from "./Admin/AdminPages/AllUsers";
 import { getUserSuccess } from "./Admin/Redux/AdminAction";
 import MainPage from "./Admin/AdminPages/MainPage";
 import Account from "./Pages/Account/Account";
+import Error from "./Pages/Error/Error";
+import Footer from "./component/Footer/Footer";
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
   const dispatch = useDispatch()
   let token = localStorage.getItem("usersdatatoken");
   const {login,isAuthenticated} = useSelector(store => store.login)
+
+  // console.log(login.role)
 
 
 
@@ -40,30 +44,28 @@ function App() {
   return (
     <>
     <Navbar user={{login,isAuthenticated}} />
-    {/* <Order/> */}
       <Routes>
       {
         isAuthenticated == true ?( <>
-          <Route path='/adminform' element={<ProForm/>}/>
-          <Route path='/admin' element={<AdminPanel/>}/> 
-        </>) : (<Route path='/login' element={<Login/>}/>)
-      }
-       <Route path='/adminform' element={<ProForm/>}/>
-       <Route path='/account' element={<Account/>}/>
-         <Route path='/admin' element={<AdminPanel/>}/>
+        <Route path="/shipping" element={<Shipping /> } /> 
+        <Route path='/payment' element={<Payment/>} />
+        <Route path="/order" element={<Order /> } />
+        <Route path='/account' element={<Account/>}/>
+        <Route path='/adminform' element={<ProForm/>}/>
+        <Route path='/admin' element={<AdminPanel/>}/>
         <Route path="/landing" element={<MainPage/>}/>
         <Route path='/users' element={<AllUsers/>}/>
         <Route path="/admin/edit/product/:id" element={<AdminEdit /> } />
-        <Route path='/login' element={<Login/>}/>
-        <Route path="/shipping" element={<Shipping /> } /> 
+        </>) : (<Route path='/login' element={<Login/>}/>)
+      }  
         <Route path="/" element={<Home /> } />
+        <Route path="*" element={<Error /> } />
         <Route path="/pro" element={<Products /> } />
-        <Route path="/order" element={<Order /> } />
         <Route path='/signup' element={<Signup/>}/>
         <Route path="/product/:id" element={<SingleProduct /> } />
         <Route path='/cart' element={<Cart/>} />
-        <Route path='/payment' element={<Payment/>} />
       </Routes>
+      <Footer/>
     </>
   );
 }

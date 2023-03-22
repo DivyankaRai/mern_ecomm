@@ -32,7 +32,7 @@ const Products = () => {
     dispatch(getProductsRequest());
 
     return axios
-      .get(`https://glowgirlbackend.onrender.com/products?search=${search}&category=${category}&sort=${sort}&page=1`)
+      .get(`https://nykkabackend-cgkg.onrender.com/products?search=${search}&category=${category}&sort=${sort}&page=1`)
       .then((res) => {                                      
         dispatch(getProductsSuccess(res.data));
       })
@@ -60,7 +60,7 @@ const Products = () => {
           <NavSecond/>
           {
             spin ? <Loader/> :      <div className='pro_maind'>
-            <div className="sorted">
+            <div className="p_sorted">
                 <div className="s2">
                 <h3 style={{color:"#fc2779",marginLeft: "10%",marginTop: "8%"}}>Filter By Category</h3>
                 <Form>
@@ -194,7 +194,7 @@ const Products = () => {
                   </form>
                 </div>
             </div>
-              <div className="main">
+              <div className="main_pro">
                 {product.map((e, i) => {
                   return (
                     <>

@@ -28,13 +28,13 @@ const SingleProduct = () => {
   const product = useSelector((store) => store.singleProduct.singleProducts);
 
   const { id } = useParams();
-  const [spin, setspin] = useState(false);
+  const [spin, setspin] = useState(true);
   const [quantity, setquantity] = useState(1);
 
   const getProduct = () => {
     dispatch(singleProductRequest());
     return axios
-      .get(`https://glowgirlbackend.onrender.com/product/${id}`)
+      .get(`https://nykkabackend-cgkg.onrender.com/product/${id}`)
       .then((res) => {
         console.log(res.data);
         dispatch(singleProductSuccess(res.data));
@@ -77,11 +77,11 @@ const SingleProduct = () => {
 
   return (
     <>
-      {spin ? (
-        <Loader />
-      ) : (
+    <NavSecond/>
+      {
+      spin ? 
+        <Loader /> : (
         <>
-        <NavSecond/>
         <div className="s_main">
           <div className="s_img">
             <img src={product.images} alt="" />
@@ -100,22 +100,17 @@ const SingleProduct = () => {
                 <i
                   class="fa-solid fa-square-plus"
                   onClick={incQuantity}
-                  // style={{ color: " #fc2779", fontSize: "30px" }}
                 ></i>
                 <h2>{quantity}</h2>
                 <i
                   class="fa-solid fa-square-minus"
                   onClick={quantity > 1 ? decQuantity : ""}
-                  // style={{ color: " #fc2779", fontSize: "30px" }}
                 ></i>
               </div>
               <button className="button" onClick={addtoCart}>
                 Add to Bag
               </button>
             </div>
-            {/* <div className="last">
-
-            </div> */}
           </div>
           <ToastContainer position="top-center"/>
         </div>

@@ -32,7 +32,7 @@ const AdminEdit = () => {
 
     const getProduct = () => {
     return axios
-      .get(`https://glowgirlbackend.onrender.com/product/${id}`)
+      .get(`https://nykkabackend-cgkg.onrender.com/product/${id}`)
       .then((res) => {
         console.log(res.data);
         dispatch(singleProductSuccess(res.data));
@@ -84,7 +84,7 @@ const AdminEdit = () => {
             stock: ""
           });
         }
-        // alert('Product Updated Successfully.')
+        toast('Product Updated Successfully.')
         nav('/admin')
 
       } catch (error) {
@@ -105,7 +105,7 @@ const AdminEdit = () => {
       {spin ? (
         <Loader />
       ) : (
-        <div className="login_div">
+        <div className="add_div">
           <h1>Edit product</h1>
           <input
             className="input"

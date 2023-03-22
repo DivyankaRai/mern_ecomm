@@ -4,10 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserSuccess } from '../Redux/AdminAction';
 import './AllUser.css'
 import SmallNav from './SmallNav';
+import { Loader } from '../../component/Loading';
+import { ToastContainer,toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const AllUsers = () => {
 
     const dispatch = useDispatch();
+    const [spin, setspin] = useState(true);
     const allUser = useSelector(store => store.admin.allUser)
     const user = useSelector(store => store.login.login)
     const token = localStorage.getItem('usersdatatoken')
@@ -15,13 +19,14 @@ const AllUsers = () => {
 
     const getTodos = async() => {
       return axios
-      .get(`http://localhost:8000/user/details`,{
+      .get(`https://nykkabackend-cgkg.onrender.com/user/details`,{
                       headers: {
                           "Content-Type": "application/json",
                           "authorization": token,
                           }
                       })
       .then((res) => {
+        console.log(res,"sdfghj")
         dispatch(getUserSuccess(res.data));
       })
       .catch((err) => {
@@ -31,16 +36,16 @@ const AllUsers = () => {
     const deleteProduct = async(id) => {
       console.log(id)
       try {
-        const delData = axios.delete(`http://localhost:8000/delete/user/${id}`, {
+        const delData = await axios.delete(`https://nykkabackend-cgkg.onrender.com/delete/user/${id}`, {
                     headers: {
                         authorization: token,
                        role: user.role
                     },
                   })
-                  // toast("Product deleted Successfully")
                   getTodos()
+                  toast("User deleted Successfully")
+                  // getTodos()
                   console.log(allUser)
-        console.log(delData)
       } catch (error) {
         console.log(error)
       }
@@ -48,6 +53,9 @@ const AllUsers = () => {
 
 
     useEffect(() => {
+      setTimeout(() => {
+        setspin(false);
+      }, 1300);
       getTodos()
     }, [])
    
@@ -55,7 +63,11 @@ const AllUsers = () => {
   return (
     <>
     <SmallNav/>
-      <div className="users_main">
+    {
+      spin ? (
+        <Loader />
+      ) : ( 
+        <div className="users_main">
         {
             allUser.map((e,i)=>{
                 return(
@@ -72,6 +84,8 @@ const AllUsers = () => {
             })
         }
       </div>
+      ) }
+       <ToastContainer position="top-center"/>
     </>
   )
 }

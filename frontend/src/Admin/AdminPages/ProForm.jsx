@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import "../../Pages/Register/Login.css";
+import "./Proform.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../component/./Loading";
 import axios from "axios";
 import { addProductFailure, addProductRequest, addProductSuccess } from "../Redux/AdminAction";
-import NavSecond from "../../component/header/NavSecond";
 import SmallNav from "./SmallNav";
 
 const ProForm = () => {
@@ -92,7 +91,7 @@ const ProForm = () => {
       {spin ? (
         <Loader />
       ) : (
-        <div className="login_div">
+        <div className="add_div">
           <h1>Add new product</h1>
           <input
             className="input"

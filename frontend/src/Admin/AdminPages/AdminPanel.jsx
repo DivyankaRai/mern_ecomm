@@ -27,7 +27,7 @@ const AdminPanel = () => {
     dispatch(getProductsRequest());
 
     return axios
-      .get(`https://glowgirlbackend.onrender.com/products?search=${search}&category=${category}&sort=${sort}`)
+      .get(`https://nykkabackend-cgkg.onrender.com/products?search=${search}&category=${category}&sort=${sort}`)
       .then((res) => {
         dispatch(getProductsSuccess(res.data));
       })
@@ -39,7 +39,7 @@ const AdminPanel = () => {
   const deleteProduct = async(id) => {
     console.log(id)
     try {
-      const delData = axios.delete(`http://localhost:8000/delete/product/${id}`, {
+      const delData = axios.delete(`https://nykkabackend-cgkg.onrender.com/delete/product/${id}`, {
                   headers: {
                       authorization: token,
                      role: user.role
@@ -60,7 +60,7 @@ const AdminPanel = () => {
   return (
     <>
     <SmallNav/>
-       <div className='pro_maind'>
+       <div className='admin_pro_maind'>
     <div className="sorted">
         <div className="s2">
         <h3 style={{color:"#fc2779",marginLeft: "10%",marginTop: "8%"}}>Filter By Category</h3>

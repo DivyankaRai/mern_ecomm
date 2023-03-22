@@ -66,14 +66,16 @@ const Signup = () => {
         }
       }
       dispatch(getSignupRequest())
-      axios.post('http://localhost:8000/user/register',
+      axios.post('https://nykkabackend-cgkg.onrender.com/user/register',
         data,
         config
       ).then((res) => {
         console.log(res)
         dispatch(getSignupSuccess(res.data.finalUser))
+        toast('Sign up Successfully.')
         nav('/login')
       }).catch((error) => {
+        toast.error('This email address already exist.')
         dispatch(getSignupFailure());
         console.log(error)
       });

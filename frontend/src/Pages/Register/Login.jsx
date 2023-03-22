@@ -26,12 +26,14 @@ const Login = () => {
 
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
     setdata({ ...data, [name]: value });
   };
 
   const handleSubmit = (e) =>{
-      e.preventDefault();
+    
+      // e.preventDefault();
 
       const {email,password} = data;
 
@@ -42,29 +44,31 @@ const Login = () => {
         toast.error("Please enter your password")
       }
       else{
-        const config = {
-          headers:{
-            "Content-Type": "application/json"
-          },
-          credentials: "include"
-        }
         dispatch(getLoginRequest())
-  
-        return axios.post('http://localhost:8000/user/login',
-            {email,password},
-            config
-          ).then((res) => {
-            console.log(res)
-            dispatch(getLoginSuccess(res.data.result.userValid))
-            if(res.status === 201){
-              localStorage.setItem("usersdatatoken",res.data.result.token);
-              toast('User logged in Successfully')
-              nav('/')
-            }
-          }).catch((err) => {
-            console.log(err)
+        const data = new FormData();
+      data.append("email", email);
+      data.append("password", password);
+      const config = {
+        headers:{
+          "Content-Type": "application/json"
+        }
+      }
+      axios.post('https://nykkabackend-cgkg.onrender.com/user/login',
+        data,
+        config
+      ).then((res) => {
+        console.log(res)
+        dispatch(getLoginSuccess(res.data.result.userValid))
+        if(res.data.status === 201){
+          localStorage.setItem("usersdatatoken",res.data.result.token);
+          toast('User logged in Successfully')
+          nav('/')
+        }
+      }).catch((err) => {
+        toast.error('This email address does not match with the password.')
+        console.log(err)
             dispatch(getLoginFailure());
-          });
+      });
       }
   }
 
@@ -72,9 +76,9 @@ const Login = () => {
     setTimeout(() => {
       setspin(false);
     }, 1300);
-    if(isAuthenticated){
-      nav('/')
-    }
+    // if(isAuthenticated){
+    //   nav('/')
+    // }
   }, [isAuthenticated])
 
 

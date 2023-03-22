@@ -17,7 +17,7 @@ const ResponsiveNav = ({user,isAuthenticated,drawerr}) => {
       nav('/admin')
     }
     else{
-      alert('Sorry you are not an Admin!')
+      toast.error('Sorry you are not an Admin!')
     }
   }
 
@@ -25,7 +25,7 @@ const ResponsiveNav = ({user,isAuthenticated,drawerr}) => {
     let token = localStorage.getItem("usersdatatoken");
     // console.log(token)
 
-    const res = await fetch("http://localhost:8000/user/logout", {
+    const res = await fetch("https://nykkabackend-cgkg.onrender.com/user/logout", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -59,18 +59,18 @@ const signin = () =>{
               : 
            <h1 className='avtar2' onClick={()=>{signin();drawerr()}} >Signin</h1>
           }
-        {/* <h1 className='avtar2'>Signin</h1> */}
         </div>
         <div className="nav_btn" onClick={()=>{drawerr()}}>
             <Link to='/'>Home</Link>
             <Link to='/pro'>Categories</Link>
             <Link to='/pro'>Brands</Link>
             <Divider/>
-            <Link to='' onClick={()=>admin()}>Admin Panel</Link>
+            <Link to='/admin' onClick={()=>admin()}>Admin Panel</Link>
             <Link to='/account'>My Account</Link>
-            <Link to='' onClick={()=>logoutuser()}>Logout</Link>
+            <Link to='' onClick={()=>logoutuser()}>Logout&nbsp;&nbsp;<i class="fa-solid fa-arrow-right-to-bracket"></i></Link>
         </div>
       </div>
+      <ToastContainer position="top-center"/>
     </>
   )
 }

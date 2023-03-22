@@ -1,5 +1,5 @@
 .pay_div{
-    width: 79vh;
+    width: 40%;
     height:auto;
     /* border:2px solid red; */
     margin: auto;
@@ -73,8 +73,8 @@
     border:none;
     margin-bottom: 5%;
 }
-/* @media only screen and (max-width:395px)  {
-    .login_div{
+@media only screen and (max-width:395px)  {
+    .pay_div{
         width: 60vh;
         height:auto;
         margin: auto;
@@ -83,13 +83,13 @@
         padding-top: 3%;
         padding-bottom: 4%;
     }
-    .login_div h1{
+    .pay_div h1{
         margin-top: 5%;
     }
 }
 
 @media only screen and (min-width:396px) and (max-width:520px){
-    .login_div{
+    .pay_div{
         width: 60vh;
         height:auto;
         margin: auto;
@@ -98,12 +98,12 @@
         padding-top: 3%;
         padding-bottom: 4%;
     }
-    .login_div h1{
+    .pay_div h1{
         margin-top: 7%;
     }
 }
 @media only screen and (min-width:521px) and (max-width:780px){
-    .login_div{
+    .pay_div{
         width: 60vh;
         height:auto;
         margin: auto;
@@ -112,35 +112,35 @@
         padding-top: 3%;
         padding-bottom: 4%;
     }
-    .login_div h1{
+    .pay_div h1{
         margin-top: 3%;
     }
 }
 @media only screen and (min-width:781px) and (max-width:935px){
-    .login_div{
+    .pay_div{
         width: 70vh;
         height:auto;
         margin: auto;
-        margin-top: 14%;
+        margin-top: 16%;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
         padding-top: 3%;
         padding-bottom: 4%;
     }
-    .login_div h1{
+    .pay_div h1{
         margin-top: 3%;
     }
 }
 @media only screen and (min-width:936px) and (max-width:1180px){
-    .login_div{
+    .pay_div{
         width: 60vh;
         height:auto;
         margin: auto;
-        margin-top: 10%;
+        margin-top: 15%;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
         padding-top: 3%;
         padding-bottom: 4%;
     }
-    .login_div h1{
+    .pay_div h1{
         margin-top: 3%;
     }
-} */
+}

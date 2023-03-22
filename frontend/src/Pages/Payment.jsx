@@ -74,7 +74,7 @@ const Payment = () => {
       }
       // console.log(orderData)
       const dataa = await axios.post(
-        'https://glowgirlbackend.onrender.com/order',
+        'https://nykkabackend-cgkg.onrender.com/order',
         orderData,
         {
           headers:{
@@ -87,12 +87,27 @@ const Payment = () => {
     }
 }
 
+function counter(){
+  let i=0;
+  let id= setInterval(function(){
+    if(i==0){
+      toast('Your Payment has been done')
+    }
+    else if(i==3){
+      toast("Your order is confirmed")
+      clearInterval(id)
+    } 
+    i++
+  },1000)
+}
+
+
   useEffect(() => {
     if(isSuccess === true){
+      counter()
       localStorage.removeItem("cart");
       dispatch(addCartItems([]))
       sessionStorage.removeItem("orderInfo");
-      alert('Your Payment has been done')
       nav('/')
     }
   }, [isSuccess])

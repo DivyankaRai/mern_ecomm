@@ -7,14 +7,13 @@ const NavSecond = () => {
     <div className='new_nav'>
       <div className="nav_data">
         <div className="left_data">
-          <Link to='/pro' style={{textDecoration: 'none'}}><p>Categories</p></Link>
-            
-            <p>Beauty Advice</p>
-            <p>Brands</p>
-            <p>Makeup</p>
-            <p>Skin</p>
-            <p>Hair</p>
-            <p>Fragrances</p>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Categories</p></Link>    
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Beauty Advice</p></Link>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Brands</p></Link>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Makeup</p></Link>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Skin</p></Link>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Hair</p></Link>
+          <Link to='/pro' style={{textDecoration: 'none'}}><p>Fragrances</p></Link>
         </div>
         <div className="right_data">
 
