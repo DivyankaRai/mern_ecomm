@@ -156,7 +156,7 @@ const Signup = () => {
             />
             <br />
             <button className="buton" type="submit" onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Loading...' : 'Signup'} {/* Show loader in button */}
+              {loading ? 'Loading...' : 'Signup'}
             </button>
             <h5>
               Already have an account?{" "}

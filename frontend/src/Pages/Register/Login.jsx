@@ -102,15 +102,15 @@ const Login = () => {
             <input
               className="input"
               name="password"
-              type="password" // Updated type to password for security
+              type="password" 
               placeholder="Enter Your Password"
               style={{ fontSize: "17px", textAlign: "center" }}
-              value={data.password} // Bind the value to state
+              value={data.password} 
               onChange={handleChange}
             />
             <br />
             <button className="buton" onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Loading...' : "Login"} {/* Show loader in button */}
+              {loading ? 'Loading...' : "Login"}
             </button>
             <h5>
               Don't have an account?{" "}
