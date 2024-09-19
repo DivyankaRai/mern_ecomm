@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -11,6 +11,7 @@ import {
 import NavSecond from "../../component/header/NavSecond";
 import "./products.css";
 import { Form } from "react-bootstrap";
+import { debounce } from 'lodash';
 
 const Products = () => {
   const [filters, setFilters] = useState({ sort: "desc", category: "All", search: "" });
@@ -20,36 +21,37 @@ const Products = () => {
   const product = useSelector((store) => store.products.products);
 
   // Function to fetch products with filters
-  const getTodos = async() => {
+  const getTodos = useCallback(async() => {
     dispatch(getProductsRequest());
-    return axios
-      .get(
+    try {
+      const response = await axios.get(
         `https://nykkabackend-cgkg.onrender.com/products?search=${filters.search}&category=${filters.category}&sort=${filters.sort}`
-      )
-      .then((res) => {
-        dispatch(getProductsSuccess(res.data));
-        setLoading(false);
-      })
-      .catch((err) => {
-        dispatch(getProductsFailure());
-        setLoading(false);
-      });
-  };
+      );
+      dispatch(getProductsSuccess(response.data));
+    } catch (error) {
+      dispatch(getProductsFailure());
+    } finally {
+      setLoading(false);
+    }
+  }, [filters, dispatch]);
 
-  // Handle product navigation
-  const shift = (id) => {
-    navigate(`/product/${id}`);
-  };
+  // Debounced fetch function to avoid rapid API calls
+  const debouncedGetTodos = useCallback(debounce(getTodos, 300), [getTodos]);
 
   // Use effect to fetch products on filter change
   useEffect(() => {
-    getTodos();
-  }, [filters]);
+    debouncedGetTodos();
+  }, [filters, debouncedGetTodos]);
 
   // Handler for category and sorting changes
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle product navigation
+  const shift = (id) => {
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -62,27 +64,26 @@ const Products = () => {
           <div className="p_sorted">
             <h3 style={{ color: "#fc2779", marginLeft: "10%", marginTop: "8%" }}>Filter By Category</h3>
             <Form>
-            {["All", "Hair", "Lips", "Eyes", "Skin", "Nails", "Fragrances"].map((category) => (
-              <Form.Check
-                key={category}
-                inline
-                label={`\u00A0\u00A0${category}`}
-                name="category"
-                value={category.toLowerCase()}
-                onChange={handleFilterChange}
-                type="radio"
-                id={`category-${category}`}
-                style={{
-                  fontSize: "17px",
-                  fontWeight: "600",
-                  marginLeft: "10%",
-                  marginTop: "4%",
-                }}
-                // Make "All" the default selected option
-                defaultChecked={category === "All"}  // This will set "All" as the default
-              />
-            ))}
-          </Form>
+              {["All", "Hair", "Lips", "Eyes", "Skin", "Nails", "Fragrances"].map((category) => (
+                <Form.Check
+                  key={category}
+                  inline
+                  label={`\u00A0\u00A0${category}`}
+                  name="category"
+                  value={category.toLowerCase()}
+                  onChange={handleFilterChange}
+                  type="radio"
+                  id={`category-${category}`}
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: "600",
+                    marginLeft: "10%",
+                    marginTop: "4%",
+                  }}
+                  defaultChecked={category === "All"}
+                />
+              ))}
+            </Form>
             <h3 style={{ color: "#fc2779", marginLeft: "10%", marginTop: "12%" }}>Filter By Price</h3>
             <Form>
               {["asc", "desc"].map((sortOption) => (
@@ -131,4 +132,4 @@ const Products = () => {
   );
 };
 
-export default Products; 
+export default Products;
