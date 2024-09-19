@@ -43,7 +43,6 @@ exports.getProducts = async(req,res)=> {
     try {
         const data = await product.find(query)
         .sort({price:sort === "desc" ? -1 : 1})
-        .skip(skip).limit(limit)
         // console.log(data)
         res.status(200).json(data)
     } catch (error) {

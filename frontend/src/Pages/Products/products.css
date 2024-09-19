@@ -59,19 +59,19 @@
     margin-bottom: 40px;
 }
 
-.pro_maind .p_sorted{
+.pro_maind .p_sorted {
     width: 19%;
     height: auto;
     margin: auto;
-    /* display: flex;
-    justify-content: space-around; */
     position: fixed;
-    z-index: -5;
+    z-index: 1;  /* Set this to a positive value like 1 */
     margin-top: 0.1%;
     padding-bottom: 3%;
-    margin-left:3%;
+    margin-left: 3%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgb(0, 0, 0, 0.23) 0px 3px 6px;
 }
+
+
 .s2 h3{
     font-size: 22px;
 }

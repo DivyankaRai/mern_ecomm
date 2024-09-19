@@ -1,221 +1,134 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Alert from 'react-bootstrap/Alert';
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Dropdown from "react-bootstrap/Dropdown";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import "./products.css";
 import axios from "axios";
+import { Loader } from "../../component/Loading";
 import {
   getProductsRequest,
   getProductsFailure,
   getProductsSuccess,
 } from "../../redux/Products/productAction";
 import NavSecond from "../../component/header/NavSecond";
-import { Loader } from "../../component/Loading";
+import "./products.css";
+import { Form } from "react-bootstrap";
 
 const Products = () => {
-
-  const [sort, setsort] = useState("desc")
-  const [spin, setspin] = useState(true)
-  const [category, setcategory] = useState("All")
-  const [search, setsearch] = useState("")
-  const nav = useNavigate()
-
-
-  const product = useSelector((store) => store.products.products);
+  const [filters, setFilters] = useState({ sort: "desc", category: "All", search: "" });
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const product = useSelector((store) => store.products.products);
 
-  const getTodos = () => {
+  // Function to fetch products with filters
+  const getTodos = async() => {
     dispatch(getProductsRequest());
-
     return axios
-      .get(`https://nykkabackend-cgkg.onrender.com/products?search=${search}&category=${category}&sort=${sort}&page=1`)
-      .then((res) => {                                      
+      .get(
+        `https://nykkabackend-cgkg.onrender.com/products?search=${filters.search}&category=${filters.category}&sort=${filters.sort}`
+      )
+      .then((res) => {
         dispatch(getProductsSuccess(res.data));
+        setLoading(false);
       })
       .catch((err) => {
         dispatch(getProductsFailure());
+        setLoading(false);
       });
   };
 
-  console.log(category)
-
+  // Handle product navigation
   const shift = (id) => {
-    console.log(id)
-    nav(`/product/${id}`)
-  }
-  
+    navigate(`/product/${id}`);
+  };
+
+  // Use effect to fetch products on filter change
   useEffect(() => {
     getTodos();
-    setTimeout(() => {
-      setspin(false)
-    }, 1000);
-  }, [category,sort]);
+  }, [filters]);
+
+  // Handler for category and sorting changes
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <>
-          <NavSecond/>
-          {
-            spin ? <Loader/> :      <div className='pro_maind'>
-            <div className="p_sorted">
-                <div className="s2">
-                <h3 style={{color:"#fc2779",marginLeft: "10%",marginTop: "8%"}}>Filter By Category</h3>
-                <Form>
-              {['radio'].map((type) => (
-                <div className="mb-5">
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;All"
-                    name="group1"
-                    value="All"
-                    onChange={(e)=>setcategory(e.target.value)}
-                    type={type}
-                    id={`inline-${type}-2`}
-                    style={{fontSize:"17px", fontWeight: "600", marginLeft: "10%",marginTop: "8%",
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Hair"
-                    name="group1"
-                    value="hair"
-                    onChange={(e)=>setcategory(e.target.value)}
-                    type={type}
-                    id={`inline-${type}-3`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%",
-                    }}
-                  />
-                   <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Lips"
-                    name="group1"
-                    value="lips"
-                    onChange={(e)=>setcategory(e.target.value)} 
-                    type={type}
-                    id={`inline-${type}-2`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Eyes"
-                    name="group1"
-                    value="eyes"
-                    onChange={(e)=>setcategory(e.target.value)}
-                    type={type}
-                    id={`inline-${type}-3`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                   <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Skin"
-                    name="group1"
-                    value="skin"
-                    onChange={(e)=>setcategory(e.target.value)} 
-                    type={type}
-                    id={`inline-${type}-2`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Nails"
-                    name="group1"
-                    value="nails"
-                    onChange={(e)=>setcategory(e.target.value)}
-                    type={type}
-                    id={`inline-${type}-3`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                   <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Fragrances"
-                    name="group1"
-                    value="fragrances"
-                    onChange={(e)=>setcategory(e.target.value)}
-                    type={type}
-                    id={`inline-${type}-3`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                </div>
+      <NavSecond />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="pro_maind">
+          <div className="p_sorted">
+            <h3 style={{ color: "#fc2779", marginLeft: "10%", marginTop: "8%" }}>Filter By Category</h3>
+            <Form>
+            {["All", "Hair", "Lips", "Eyes", "Skin", "Nails", "Fragrances"].map((category) => (
+              <Form.Check
+                key={category}
+                inline
+                label={`\u00A0\u00A0${category}`}
+                name="category"
+                value={category.toLowerCase()}
+                onChange={handleFilterChange}
+                type="radio"
+                id={`category-${category}`}
+                style={{
+                  fontSize: "17px",
+                  fontWeight: "600",
+                  marginLeft: "10%",
+                  marginTop: "4%",
+                }}
+                // Make "All" the default selected option
+                defaultChecked={category === "All"}  // This will set "All" as the default
+              />
+            ))}
+          </Form>
+            <h3 style={{ color: "#fc2779", marginLeft: "10%", marginTop: "12%" }}>Filter By Price</h3>
+            <Form>
+              {["asc", "desc"].map((sortOption) => (
+                <Form.Check
+                  key={sortOption}
+                  inline
+                  label={sortOption === "asc" ? "Low To High" : "High To Low"}
+                  name="sort"
+                  value={sortOption}
+                  onChange={handleFilterChange}
+                  type="radio"
+                  id={`sort-${sortOption}`}
+                  style={{
+                    fontSize: "17px",
+                    fontWeight: "600",
+                    marginLeft: "10%",
+                    marginTop: "4%",
+                  }}
+                  defaultChecked={sortOption === "desc"}
+                />
               ))}
             </Form>
+          </div>
+
+          <div className="main_pro">
+            {product.map((e, i) => (
+              <div key={i} onClick={() => shift(e._id)}>
+                <img src={e.images} alt="" />
+                <h2>{e.name}</h2>
+                <div>
+                  {[...Array(4)].map((_, index) => (
+                    <i
+                      key={index}
+                      className="fa-solid fa-star"
+                      style={{ color: "#fc2779", fontSize: "12px" }}
+                    ></i>
+                  ))}
                 </div>
-                <div className="s2">
-                <h3 style={{color:"#fc2779",marginLeft: "10%",marginTop: "12%"}}>Filter By Price</h3>
-                <Form>
-              {['radio'].map((type) => (
-                <div  key={`inline-${type}`} className="mb-5">
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;Low To High"
-                    name="group1"
-                    value="asc"
-                    onChange={(e)=>setsort(e.target.value)} 
-                    type={type}
-                    id={`inline-${type}-2`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "7%"}}
-                  />
-                  <Form.Check
-                    inline
-                    label="&nbsp;&nbsp;High To Low"
-                    name="group1"
-                    value="desc"
-                    onChange={(e)=>setsort(e.target.value)} 
-                    type={type}
-                    id={`inline-${type}-3`}
-                    style={{fontSize:"17px", fontWeight: "600",marginLeft: "10%",marginTop: "4%"}}
-                  />
-                </div>
-              ))}
-            </Form>
-                </div>
-                <div className="opt">
-                <form action="">
-                  <select onChange={(e)=>setcategory(e.target.value)}>
-                    <option value="All">Filter by Category</option>
-                    <option value="lips">Lips</option>
-                    <option value="eyes">Eyes</option>
-                    <option value="hair">Hair</option>
-                    <option value="skin">Skin</option>
-                    <option value="nails">Nails</option>
-                    <option value="fragrances">Fragrances</option>
-                  </select>
-                  </form>
-                </div>
-                <div className="opt2">
-                <form action="">
-                  <select onChange={(e)=>setsort(e.target.value)} >
-                    <option value="">Filter by Price</option>
-                    <option value="asc">Low to high</option>
-                    <option value="desc">High to low</option>
-                  </select>
-                  </form>
-                </div>
-            </div>
-              <div className="main_pro">
-                {product.map((e, i) => {
-                  return (
-                    <>
-                      <div onClick={()=>shift(e._id)}>
-                          <img src={e.images} alt="img" />
-                        <h2>{e.name}</h2>
-                        <div><i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
-                        <i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
-                        <i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
-                        <i class="fa-solid fa-star" style={{color:"#fc2779", fontSize:"12px"}}></i>
-                        </div>
-                        <p style={{fontWeight: "600"}}>MRP: ₹{e.price}</p>
-                      </div>
-                    </>
-                  );
-                })}
+                <p style={{ fontWeight: "600" }}>MRP: ₹{e.price}</p>
               </div>
-            </div>
-          }
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };
 
-export default Products;
+export default Products; 

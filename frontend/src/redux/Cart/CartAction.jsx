@@ -5,7 +5,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART, SHIPPING_INFO } from "./CartActonType";
 
 export const addCartItems = (id,quantity) => async(dispatch,getState) => {
 
-    const {data} = await axios.get(`http://localhost:8000/product/${id}`)
+    const {data} = await axios.get(`https://nykkabackend-cgkg.onrender.com/product/${id}`)
     console.log(data)
     dispatch({
         type: ADD_TO_CART,

@@ -24,7 +24,7 @@ export const getLoginFailure = () =>{
 export const getUserData = (token) => async(dispatch) =>{
 
 
-    const {data} = await axios.get(`http://localhost:8000/validuser`,{
+    const {data} = await axios.get(`https://nykkabackend-cgkg.onrender.com/validuser`,{
     headers: {
         "Content-Type": "application/json",
         "Authorization": token
@@ -40,7 +40,7 @@ export const getUserData = (token) => async(dispatch) =>{
 
 export const getOrderData = (token,id) => async(dispatch) =>{
 
-    const {data} = await axios.get(`http://localhost:8000/order/${id}`,{
+    const {data} = await axios.get(`https://nykkabackend-cgkg.onrender.com/order/${id}`,{
     headers: {
         "Content-Type": "application/json",
         "Authorization": token

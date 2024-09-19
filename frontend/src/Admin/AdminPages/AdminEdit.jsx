@@ -4,22 +4,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../../Pages/Register/Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Loader } from "../../component/./Loading";
+import { Loader } from "../../component/Loading";
 import axios from "axios";
 import SmallNav from "./SmallNav";
 import { singleProductSuccess } from "../../redux/SingleProduct/singleProductAction";
 import { editProductSuccess } from "../Redux/AdminAction";
 
 const AdminEdit = () => {
-
-    const { id } = useParams();
-
-    const user = useSelector(store => store.login.login)
-    const nav = useNavigate()
-    let token = localStorage.getItem("usersdatatoken");
+  const { id } = useParams();
+  const user = useSelector((store) => store.login.login);
+  const nav = useNavigate();
+  let token = localStorage.getItem("usersdatatoken");
   const dispatch = useDispatch();
-  const [spin, setspin] = useState(true);
-  const [data, setdata] = useState({
+  const [spin, setSpin] = useState(true); // For initial loading
+  const [submitting, setSubmitting] = useState(false); // For form submission
+  const [data, setData] = useState({
     name: "",
     description: "",
     price: "",
@@ -29,79 +28,81 @@ const AdminEdit = () => {
     stock: "",
   });
 
-
-    const getProduct = () => {
+  // Fetch product details
+  const getProduct = () => {
     return axios
       .get(`https://nykkabackend-cgkg.onrender.com/product/${id}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(singleProductSuccess(res.data));
-        setdata(res.data)
+        setData(res.data);
       })
       .catch((err) => {
+        toast.error("Failed to load product details");
       });
   };
 
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setdata({ ...data, [name]: value });
+    setData({ ...data, [name]: value });
   };
 
-
+  // Submit edited product
   const shippingSubmit = async (e) => {
     e.preventDefault();
-
     const { name, description, price, rating, images, category, stock } = data;
 
-
-    if (
-      (name == "" || description == "" || price == "" || rating == "" || images == "" || category == "" || stock == "")
-    ) {
+    // Validation: Ensure all fields are filled
+    if (name === "" || description === "" || price === "" || rating === "" || images === "" || category === "" || stock === "") {
       toast.error("Please fill all the details");
     } else {
       try {
+        setSubmitting(true); // Show spinner during submission
         const prodataa = await axios.put(
           `/update/product/${id}`,
           { name, description, price, rating, images, category, stock },
           {
             headers: {
               authorization: token,
-              role: user.role
+              role: user.role,
             },
           }
         );
-        console.log(prodataa);
-        if(prodataa.status == 200){
-          dispatch(editProductSuccess(prodataa.data))
-          setdata({
-            ...data,
+        
+        if (prodataa.status === 200) {
+          dispatch(editProductSuccess(prodataa.data));
+          toast.success("Product updated successfully.");
+          // Reset form fields
+          setData({
             name: "",
             description: "",
             price: "",
             rating: "",
             images: "",
             category: "",
-            stock: ""
+            stock: "",
           });
+          nav("/admin"); // Navigate back to admin page
         }
-        toast('Product Updated Successfully.')
-        nav('/admin')
-
       } catch (error) {
+        toast.error("Failed to update product.");
+      } finally {
+        setSubmitting(false); // Stop spinner
       }
     }
   };
 
+  // Fetch product details when component mounts
   useEffect(() => {
     getProduct();
     setTimeout(() => {
-      setspin(false);
+      setSpin(false); // Stop initial loading spinner
     }, 1300);
   }, []);
 
   return (
     <>
-    <SmallNav/>
+      <SmallNav />
       {spin ? (
         <Loader />
       ) : (
@@ -183,13 +184,13 @@ const AdminEdit = () => {
           />
           <br />
           <button className="buton" onClick={shippingSubmit} type="submit">
-            Edit
+            {submitting ? "Updating..." : "Edit"}
           </button>
           <ToastContainer position="top-center" />
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default AdminEdit
+export default AdminEdit;

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import "./Proform.css";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Loader } from "../../component/./Loading";
+import { Loader } from "../../component/Loading";
 import axios from "axios";
 import { addProductFailure, addProductRequest, addProductSuccess } from "../Redux/AdminAction";
 import SmallNav from "./SmallNav";
+import "./Proform.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProForm = () => {
-
-  const user = useSelector(store => store.login.login)
+  const user = useSelector((store) => store.login.login);
   const dispatch = useDispatch();
-  const [spin, setspin] = useState(true);
-  const [data, setdata] = useState({
+  
+  const [spin, setSpin] = useState(true); // For initial loading spinner
+  const [submitting, setSubmitting] = useState(false); // For form submission spinner
+  const [data, setData] = useState({
     name: "",
     description: "",
     price: "",
@@ -24,70 +24,69 @@ const ProForm = () => {
     stock: "",
   });
 
-  console.log(user)
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setdata({ ...data, [name]: value });
+    setData({ ...data, [name]: value });
   };
 
   let token = localStorage.getItem("usersdatatoken");
-  console.log(data)
 
   const shippingSubmit = async (e) => {
     e.preventDefault();
 
     const { name, description, price, rating, images, category, stock } = data;
 
-
     if (
-      (name == "" || description == "" || price == "" || rating == "" || images == "" || category == "" || stock == "")
+      name === "" || description === "" || price === "" || rating === "" || images === "" || category === "" || stock === ""
     ) {
       toast.error("Please fill all the details");
     } else {
       try {
-        dispatch(addProductRequest())
+        setSubmitting(true);  // Start form submission spinner
+        dispatch(addProductRequest());
         const prodataa = await axios.post(
           "/add/product",
           { name, description, price, rating, images, category, stock },
           {
             headers: {
               authorization: token,
-              role: user.role
+              role: user.role,
             },
           }
         );
-        console.log(prodataa);
-        if(prodataa.status == 200){
-          dispatch(addProductSuccess(prodataa.data))
-          setdata({
-            ...data,
+        
+        if (prodataa.status === 200) {
+          dispatch(addProductSuccess(prodataa.data));
+          toast.success("Product added successfully.");
+          // Reset form fields
+          setData({
             name: "",
             description: "",
             price: "",
             rating: "",
             images: "",
             category: "",
-            stock: ""
+            stock: "",
           });
         }
-        toast('Product added Successfully.')
-
       } catch (error) {
-        dispatch(addProductFailure)
+        dispatch(addProductFailure());
+        toast.error("Failed to add product.");
+      } finally {
+        setSubmitting(false); // Stop the form submission spinner
       }
     }
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setspin(false);
+      setSpin(false); // Stop the initial loading spinner
     }, 1300);
   }, []);
 
   return (
     <>
-    <SmallNav/>
+      <SmallNav />
       {spin ? (
         <Loader />
       ) : (
@@ -101,8 +100,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.name}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="text"
@@ -112,8 +110,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.description}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="number"
@@ -123,8 +120,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.price}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="url"
@@ -134,8 +130,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.images}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="text"
@@ -145,8 +140,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.category}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="number"
@@ -156,8 +150,7 @@ const ProForm = () => {
             onChange={handleChange}
             value={data.rating}
           />
-          <br />
-          <br />
+          <br /><br />
           <input
             className="input"
             type="text"
@@ -169,7 +162,7 @@ const ProForm = () => {
           />
           <br />
           <button className="buton" onClick={shippingSubmit} type="submit">
-            Add
+            {submitting ? 'Adding...' : "Add"}
           </button>
           <ToastContainer position="top-center" />
         </div>
