@@ -90,7 +90,7 @@ const Products = () => {
                 <Form.Check
                   key={sortOption}
                   inline
-                  label={sortOption === "asc" ? "Low To High" : "High To Low"}
+                  label={`\u00A0\u00A0${sortOption === "asc" ? "Low To High" : "High To Low"}`}
                   name="sort"
                   value={sortOption}
                   onChange={handleFilterChange}
